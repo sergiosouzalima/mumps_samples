@@ -1,4 +1,4 @@
-	; Prints prime numbers from 1 to 10000
+	; Prime numbers generator. ;
 	;
 	; File mame: primenumbers.mps
 	; Author: Sergio Lima (Jan, 29 2022)

@@ -1,7 +1,8 @@
 	; Giving a number, this program checks if a sequence of digits
 	; can be read the same backward as forward. ;
-	; eg, the following numbers are palindromes:
-	; 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 505, 1001, 2002, 3003. ;
+	;
+	; Eg., the following numbers are palindromes:
+	; 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 505, 1001, 2002, 3003
 	;
 	; File mame: palindrome.mps
 	; Author: Sergio Lima (Jan, 29 2022)
@@ -14,7 +15,7 @@
 	WRITE !,"Palindrome Numbers from ",min," to ",max,!!
 	FOR i=min:1:max DO
 	. SET isPalindrome=$$isPalindrome(i)
-	. WRITE:(isPalindrome=TRUE) i," "
+	. WRITE:isPalindrome i," "
 	WRITE !!
 	QUIT
 	;
