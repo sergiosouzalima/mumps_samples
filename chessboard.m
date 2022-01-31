@@ -20,10 +20,11 @@
 	;
 	DO Initialize
 	DO loadPieces
+	DO showPieces(TRUE)
 	DO loadChessBoard
 	DO showChessBoard
 	DO countPiecesOnChessBoard
-	DO showPieces
+	DO showPieces(FALSE)
 	DO Finalize
 	QUIT
 	;
@@ -71,31 +72,33 @@ loadChessBoard
 	;
 	QUIT
 	;
-showPieces
+showPieces(showCode)
 	;
 	WRITE !,"Pieces",!
-	FOR i=1:1 QUIT:'$DATA(pieces(i))  DO showPiece(pieces(i)) WRITE !
+	FOR i=1:1 QUIT:'$DATA(pieces(i))  DO showPiece(showCode,i,pieces(i)) WRITE !
 	QUIT
 	;
-showPiece(piece)
+showPiece(showCode,i,piece)
 	;
+	SET code=i
 	SET name=$PIECE(piece,"^",1)
 	SET quantity=$PIECE(piece,"^",2)
-	WRITE name_": "_quantity_" piece(s)"
+	IF showCode DO
+	. WRITE "Code "_code_") "_name
+	ELSE  DO
+	. WRITE name_": "_quantity_" piece(s)" 
 	QUIT
 	;
 showChessBoard
 	;
 	SET showRow=0
 	WRITE !,"Chessboard"
-	WRITE !,"   1 2 3 4 5 6 7 8"
 	FOR row=1:1:ROWS S showRow=showRow+1 W !,showRow,") " FOR col=1:1:COLS WRITE board(col,row)," "
 	WRITE !
 	QUIT
 	;
 countPiecesOnChessBoard
 	;
-	SET pieceCode=0
 	SET col=""
 	SET row=""
 	FOR  SET col=$ORDER(board(col)) QUIT:col=""  DO
