@@ -1,11 +1,10 @@
 	; Prime numbers generator. ;
 	;
-	; File mame: primenumbers.mps
+	; File mame: primenumbers.m
 	; Author: Sergio Lima (Jan, 29 2022)
-	; How to run: mumps primenumbers.mps
+	; How to run: mumps -r ^primenumbers
 	;
-	; Made in Open Mumps for Linux. ;
-	; http://www.cs.uni.edu/~okane/
+	; Made with GT.M Mumps for Linux. ;
 	;
 	SET min=1,max=10000,TRUE=1,FALSE=0
 	WRITE !,"Prime Numbers from ",min," to ",max,!!

@@ -1,12 +1,11 @@
 	;
 	; Count and show chess pieces on a chessboard. ;
 	;
-	; File mame: chessboard.mps
+	; File mame: chessboard.m
 	; Author: Sergio Lima (Jan, 30 2022)
-	; How to run: mumps chessboard.mps
+	; How to run: mumps -r ^chessboard
 	;
-	; Made in Open Mumps for Linux. ;
-	; http://www.cs.uni.edu/~okane/
+	; Made with GT.M Mumps for Linux. ;
 	;
 	; Considering:
 	; Pawn		.....	code 1, max quantity: 8

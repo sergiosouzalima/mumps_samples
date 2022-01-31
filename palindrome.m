@@ -4,12 +4,11 @@
 	; Eg., the following numbers are palindromes:
 	; 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 505, 1001, 2002, 3003
 	;
-	; File mame: palindrome.mps
+	; File mame: palindrome.m
 	; Author: Sergio Lima (Jan, 29 2022)
-	; How to run: mumps palindrome.mps
+	; How to run: mumps -r ^palindrome
 	;
-	; Made in Open Mumps for Linux. ;
-	; http://www.cs.uni.edu/~okane/
+	; Made with GT.M Mumps for Linux. ;
 	;
 	SET min=1,max=3003,TRUE=1,FALSE=0
 	WRITE !,"Palindrome Numbers from ",min," to ",max,!!
