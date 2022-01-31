@@ -21,6 +21,7 @@
 isPalindrome(n)
 	; result = 1, n is Palindrome
 	; result = 0, n isn't Palindrome
+	; SET reversed=$REVERSE(n) ; Alternatively $REVERSE function can be used. ;
 	SET reversed=$$reversedNumber(n)
 	QUIT:(n=reversed) TRUE
 	QUIT FALSE
@@ -29,7 +30,7 @@ reversedNumber(n)
 	; result = reversed Number
 	SET result=n,len=$LENGTH(n),reversedNumber=""
 	FOR counter=len:-1:1 DO
-	. SET reversedNumber=reversedNumber_$Extract(n,counter)
+	. SET reversedNumber=reversedNumber_$EXTRACT(n,counter)
 	SET result=reversedNumber
 	QUIT result
 	;

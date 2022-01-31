@@ -95,7 +95,11 @@ showChessBoard
 countPiecesOnChessBoard
 	;
 	SET pieceCode=0
-	FOR col=1:1 QUIT:'$ORDER(board(col,""))  FOR row=1:1 QUIT:'$DATA(board(col,row))  DO addPiece(board(col,row))
+	SET col=""
+	SET row=""
+	FOR  SET col=$ORDER(board(col)) QUIT:col=""  DO
+	. FOR  SET row=$ORDER(board(col,row)) QUIT:row=""  DO
+	. . DO addPiece(board(col,row))
 	QUIT
 	;
 addPiece(pieceCode)
