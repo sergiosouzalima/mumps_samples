@@ -1,4 +1,3 @@
-#!/usr/bin/mumps
 	;
 	FOR I=1:1:10 DO writename(I)
 	;

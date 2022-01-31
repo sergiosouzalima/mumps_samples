@@ -1,6 +1,5 @@
-#!/usr/bin/mumps
 	;
-	; file name: shell_command02.mps
+	; file name: shell_command02.m
 	;
 	S sourceFileName="numbers.txt"
 	S destFileName="new_numbers.txt"

@@ -29,6 +29,7 @@
 	;
 Initialize
 	;
+	W #
 	SET TRUE=1,FALSE=0,(COLS,ROWS)=8
 	FOR row=1:1:ROWS FOR col=1:1:COLS SET board(col,row)=0
 	QUIT

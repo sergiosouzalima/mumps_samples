@@ -1,6 +1,5 @@
-#!/usr/bin/mumps
 	;
-	; file name: shell_command03.mps
+	; file name: shell_command03.m
 	;
 	S destFileName="posts.json"
 	S commandLine="curl -s https://jsonplaceholder.typicode.com/posts?id=1 > "_destFileName

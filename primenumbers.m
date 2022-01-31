@@ -7,7 +7,7 @@
 	; Made with GT.M Mumps for Linux. ;
 	;
 	SET min=1,max=10000,TRUE=1,FALSE=0
-	WRITE !,"Prime Numbers from ",min," to ",max,!!
+	WRITE #,!,"Prime Numbers from ",min," to ",max,!!
 	FOR i=min:1:max DO  WRITE:(isPrime=TRUE) i," "
 	. SET isPrime=$$isPrime(i)
 	WRITE !!

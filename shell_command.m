@@ -1,6 +1,5 @@
-#!/usr/bin/mumps
 	;
-	; file name: shell_command.mps
+	; file name: shell_command.m
 	;
 	shell/p sort numbers.txt
 	open 1:"new_numbers.txt,new"

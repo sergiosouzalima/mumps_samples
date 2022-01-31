@@ -11,7 +11,7 @@
 	; Made with GT.M Mumps for Linux. ;
 	;
 	SET min=1,max=3003,TRUE=1,FALSE=0
-	WRITE !,"Palindrome Numbers from ",min," to ",max,!!
+	WRITE #,!,"Palindrome Numbers from ",min," to ",max,!!
 	FOR i=min:1:max DO
 	. SET isPalindrome=$$isPalindrome(i)
 	. WRITE:isPalindrome i," "
