@@ -20,18 +20,18 @@
 	;
 	DO Initialize
 	DO loadPieces
-	DO showPieces(TRUE)
+	DO showPieces(showCode)
 	DO loadChessBoard
 	DO showChessBoard
 	DO countPiecesOnChessBoard
-	DO showPieces(FALSE)
+	DO showPieces('showCode)
 	DO Finalize
 	QUIT
 	;
 Initialize
 	;
 	W #
-	SET TRUE=1,FALSE=0,(COLS,ROWS)=8
+	SET TRUE=1,FALSE=0,(COLS,ROWS)=8,showCode=TRUE
 	FOR row=1:1:ROWS FOR col=1:1:COLS SET board(col,row)=0
 	QUIT
 	;
