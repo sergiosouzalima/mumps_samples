@@ -37,9 +37,13 @@ ProcessFile(jsonFile)
 	;	
 	;FOR i=1:1 USE jsonFile READ line QUIT:$zeof  USE $principal WRITE !,i,?5,line
 	S textFile=""
-	FOR i=1:1 USE jsonFile READ line QUIT:$zeof  S textFile=textFile_line USE $principal S x=$$cleanLine(line)
+	FOR i=1:1 USE jsonFile READ line QUIT:$zeof  S textFile=textFile_line 
+	USE $principal 
 	CLOSE jsonFile
+	S textFile=$$cleanLine(textFile)
 	W textFile
+	;
+	K textFile
 	;	
 	QUIT
 	;	
