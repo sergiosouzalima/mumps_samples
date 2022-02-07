@@ -1,13 +1,13 @@
 	; Employees' Statistics Report. ;
 	;
 	; File mame: employees.m
-	; Author: Sergio Lima (Feb, 02 2022)
+	; Author: Sergio Lima (Feb, 8 2022)
 	; How to run: mumps -r ^employees
 	;
 	; Made with GT.M Mumps for Linux. ;
 	;
 	DO Initialize
-	DO ProcessFile(jsonFileName)
+	DO processFile(jsonFileName)
 	DO Finalize
 	QUIT
 	;
@@ -15,8 +15,10 @@ Initialize
 	;
 	WRITE #,!,"*** Employees' Statistics Report ***",!!
 	SET TRUE=1,FALSE=0
-	SET jsonFileName="funcionarios-10K.json" ;"funcionarios.json"
+	SET jsonFileName="funcionarios-10K.json" ;"funcionarios-30M.json" ; ;"funcionarios.json"
 	SET maxStringSize=1024*1024 ; the maximum GT.M string size
+	SET globalEmpId=0,debugRow=0
+	KILL ^globalEmp,^debug
 	QUIT
 	;
 Finalize
@@ -24,61 +26,68 @@ Finalize
 	W !!,"END RUN ****",!!
 	QUIT
 	;
-	;****************
-	; DESCRIPTION: 
-	; PARAMETERS: 
-	;    jsonFile(I/O,REQ): 
-	; RETURNS: 
-	; REVISIONS: 
-	;****************
-ProcessFile(jsonFile)
-	;
+processFile(jsonFile)
+	;	
+	;	
 	OPEN jsonFile:(readonly:recordsize=maxStringSize)
 	;	
-	;FOR i=1:1 USE jsonFile READ line QUIT:$zeof  USE $principal WRITE !,i,?5,line
-	S textFile=""
-	FOR i=1:1 USE jsonFile READ line QUIT:$zeof  S textFile=textFile_line 
-	USE $principal 
+	SET globalEmpId=0
+	SET previousLine=""
+	FOR i=1:1 DO
+	. USE jsonFile
+	. READ line
+	. QUIT:$zeof
+	. SET previousLine=previousLine_line
+	. SET previousLine=$$processLine(previousLine,i) 
+	USE $principal
 	CLOSE jsonFile
-	S textFile=$$cleanLine(textFile)
-	W textFile
-	;
-	K textFile
 	;	
 	QUIT
 	;	
-ProcessLine(line)
+processLine(line,i)
 	;	
 	SET line=$$cleanLine(line)
-	;WRITE line,!
+	;		
+	SET line=$$processObj(line,i)
+	;	
+	QUIT line
+	;	
+processObj(line,i)
+	;
+	QUIT:$length(line)<=0 line
+	;	
+	SET firstBracket=$FIND(line,"{")-1,secondBracket=$FIND(line,"}",firstBracket)-1
+	;
+	QUIT:((firstBracket=-1)!(secondBracket=-1))!(secondBracket<firstBracket) line
+	;	
+	SET obj=$extract(line,firstBracket,secondBracket)
+	;
+	DO saveObj(obj)
+	;		
+	SET restLine=$extract(line,secondBracket+1,$length(line))
+	;	
+	QUIT restLine
+	;
+saveObj(obj)
+	;
+	SET globalEmpId=globalEmpId+1
+	;	
+	SET ^globalEmp(globalEmpId)=obj
+	;	
 	QUIT
 	;	
 cleanLine(line)
 	;	
-	S line=$translate(line,",""","^")
+	SET line=$translate(line," ","")
+	SET line=$translate(line,"""","")
+	IF line="{funcionarios:[" SET line=""
+	IF line="areas:[" SET line=""
+	;	
 	QUIT line
 	;	
-setJsonToMatrix(jsonObjType,line,id)
+saveDebug(msg)
 	;
-	QUIT:line["{"
-	QUIT:line["}"
-	QUIT:line["},"
-	QUIT:line["["
-	QUIT:line["]"
-	D:jsonObjType="employee" setJsonToEmployee(line,id)
-	D:jsonObjType="department" setJsonToDepartment(line,id)
-	;USE $principal WRITE !,i,?5,jsonObjType,line
+	SET debugRow=debugRow+1
+	SET ^debug(debugRow)=msg
 	QUIT
-	;	
-setJsonToEmployee(line,id)
 	;
-	SET:line["id" id=$PIECE(line,":",1)
-	SET Employee(id)=...... ;
-	QUIT id
-	;	
-setJsonToDepartment(line,id)
-	;
-	SET:line["codigo" id=$PIECE(line,":",1)
-	SET Employee(id)=...... ;
-	QUIT id
-	;	
