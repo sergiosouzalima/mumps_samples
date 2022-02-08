@@ -9,7 +9,7 @@
 	DO Initialize
 	DO jsonToFile(jsonFileName)
 	;	
-	DO generateStats
+	DO generateStatistics
 	DO Finalize
 	QUIT
 	;
@@ -35,14 +35,7 @@ jsonToFile(jsonFile)
 	SET employeeId=0
 	SET departmentId=0
 	SET previousLine=""
-	;FOR i=1:1 DO
-	;. USE jsonFile
-	;. READ line
-	;. QUIT:$zeof
-	;. SET previousLine=previousLine_line
-	;. SET previousLine=$$processLine(previousLine,i) 
 	;	
-	;FOR i=1:1 QUIT:$zeof  USE jsonFile READ line SET previousLine=previousLine_line,previousLine=$$processLine(previousLine,i)
 	FOR i=1:1 QUIT:$zeof  SET previousLine=$$processLine(jsonFile,previousLine)
 	;	
 	USE $principal
@@ -55,7 +48,6 @@ processLine(jsonFile,previousLine)
 	USE jsonFile 
 	READ line
 	SET currentLine=previousLine_line
-	;SET previousLine=$$processLine(previousLine,i)
 	;	 
 	SET currentLine=$$cleanLine(currentLine)
 	;		
@@ -63,16 +55,6 @@ processLine(jsonFile,previousLine)
 	;	
 	QUIT previousLine
 	;
-	;QUIT previousLine
-	;	
-;processLine(line)
-	;	
-	;SET line=$$cleanLine(line)
-	;		
-	;SET restLine=$$processObj(line)
-	;	
-	;QUIT restLine
-	;	
 processObj(line)
 	;
 	QUIT:$length(line)<=0 line
@@ -108,9 +90,9 @@ cleanLine(line)
 	;	
 	QUIT line
 	;	
-generateStats
+generateStatistics
 	;
-	DO main^globalMaxMain
+	DO main^employeesGlobalMaxMain
 	;	
 	QUIT
 	;	
