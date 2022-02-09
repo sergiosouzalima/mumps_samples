@@ -1,1 +1,4 @@
-global_max|Bernardo Costa|3700.00
+global_max|Achillea Bria|99.999,86
+global_max|Alcibiades Aquilina|99.999,86
+global_min|Adinna Cervini|1,00
+global_avg|50.016,89
