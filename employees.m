@@ -17,7 +17,7 @@ Initialize
 	;
 	WRITE #,!,"*** Employees' Statistics Report ***",!!
 	SET TRUE=1,FALSE=0
-	SET jsonFileName="funcionarios-5M.json" ;"funcionarios-10K.json" ;"funcionarios-30M.json" ; "funcionarios.json" ;
+	SET jsonFileName="funcionarios.json" ;"funcionarios-5M.json" ;"funcionarios-10K.json" ;"funcionarios-30M.json" ; 
 	SET maxStringSize=1024*1024 ; the maximum GT.M string size
 	SET employeeId=0,departmentId=0,debugId=0
 	KILL ^employee,^department,^debug
@@ -78,7 +78,8 @@ saveObj(obj)
 	SET:obj["codigo" objName="department"
 	;	
 	SET:objName="employee" employeeId=employeeId+1,^employee(employeeId)=obj
-	SET:objName="department" departmentId=departmentId+1,^department(departmentId)=obj
+	;SET:objName="department" departmentId=departmentId+1,^department(departmentId)=obj
+	SET:objName="department" deptId=$P($P(obj,",",1),":",2),^department(deptId)=obj
 	;	
 	QUIT
 	;	
