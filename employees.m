@@ -92,7 +92,7 @@ cleanLine(line)
 	;	
 generateStatistics
 	;
-	DO main^employeesGlobalMaxMain
+	DO main^employeesMaxMinAvg
 	;	
 	QUIT
 	;	
