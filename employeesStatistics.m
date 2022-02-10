@@ -1,3 +1,12 @@
+	; Employees' Statistics Report. ;
+	;
+	; File mame: employeesStatistics.m
+	;
+	; Author: Sergio Lima (Feb, 9 2022)
+	; How to run: mumps -r ^employees
+	;
+	; Made with GT.M Mumps for Linux. ;
+	;
 main
 	SET maxSal=0
 	SET minSal=999999
@@ -5,43 +14,28 @@ main
 	SET avgSal=0
 	SET content=""
 	;	
-	KILL ^avgByDeptPrepare,^avgByDept
+	KILL ^avgByDeptPrepare,^avgByDept,^empByDeptPrepare
 	;	
 	; Remove "braces" from department content: } and {
 	SET deptAbbr=""
 	FOR i=1:1 SET deptAbbr=$O(^department(deptAbbr)) Q:deptAbbr=""  DO
-	. SET content=$$removeBraces(^department(deptAbbr))
+	. SET content=$$removeBraces^employeesHelper(^department(deptAbbr))
 	. SET ^department(deptAbbr)=content
 	;	
 	; Calculate Global & Department Statistics 
 	FOR i=1:1 SET id=$D(^employee(i)) Q:'id  DO
-	. SET content=$$removeBraces(^employee(i))
-	. SET maxSal=$$getMaxSalary(content,maxSal)
-	. SET minSal=$$getMinSalary(content,minSal)
-	. SET sumSal=sumSal+$$getSalary(content)
+	. SET content=$$removeBraces^employeesHelper(^employee(i))
+	. SET maxSal=$$getMaxSalary^employeesHelper(content,maxSal)
+	. SET minSal=$$getMinSalary^employeesHelper(content,minSal)
+	. SET sumSal=sumSal+$$getSalary^employeesHelper(content)
 	. SET ^employee(i)=content
+	. DO saveEmpByDept(content)
 	;
 	; Write Statistics to file
 	SET:i>0 i=i-1,avgSal=sumSal/i
 	DO writeStatisticsToFile(minSal,maxSal,avgSal)
 	;	
 	QUIT
-	;	
-getMaxSalary(content,maxSal)
-	;	
-	SET currentSal=$$getSalary(content)
-	SET:currentSal>maxSal maxSal=currentSal
-	QUIT maxSal
-	;	
-getMinSalary(content,minSal)
-	;	
-	SET currentSal=$$getSalary(content)
-	SET:currentSal<minSal minSal=currentSal
-	QUIT minSal
-	;	
-removeBraces(content)
-	;
-	QUIT $translate(content,"{}","")
 	;	
 writeStatisticsToFile(minSal,maxSal,avgSal)
 	;
@@ -83,7 +77,7 @@ writeMinMaxByDept(statisticsId,content)
 	SET lastName=$P($P(content,",",3),":",2)
 	SET salary=$P($P(content,",",4),":",2)
 	;	
-	WRITE statisticsId_"|"_deptName_"|"_firstName_" "_lastName_"|"_$$formatCurrency(salary),!
+	WRITE statisticsId_"|"_deptName_"|"_firstName_" "_lastName_"|"_$$formatCurrency^employeesHelper(salary),!
 	;
 	QUIT	
 	;
@@ -93,25 +87,8 @@ writeAvgByDept(statisticsId,content,deptName)
 	SET qtyByDept=$P($P(content,"^",2),":",2)
 	SET avg=salaryByDept/qtyByDept
 	;	
-	WRITE statisticsId_"|"_deptName_"|"_$$formatCurrency(avg),!
+	WRITE statisticsId_"|"_deptName_"|"_$$formatCurrency^employeesHelper(avg),!
 	;
-	;	
-	;area_max|Gerenciamento de Software|Bernardo Costa|3700.00
-	;area_max|Gerenciamento de Software|Richie Rich|3700.00
-	;area_max|Recrutamento|Hugh Hefner|3700.00
-	;area_min|Gerenciamento de Software|Marcelo Souza|1200.00
-	;area_min|Gerenciamento de Software|João Lenão|1200.00
-	;area_avg|Gerenciamento de Software|3450.00
-	;area_avg|Recrutamento|3000.00
-	;		
-	;^avgByDeptPrepare("area_max",3)="id:3,nome:Bernardo,sobrenome:Costa,salario:3700.00,area:SM,deptName:Gerenciamento de Software"
-	;^avgByDeptPrepare("area_min",2)="id:2,nome:Sergio,sobrenome:Pinheiro,salario:2450.00,area:SD,deptName:Desenvolvimento de Software"
-	;^avgByDeptPrepare("area_min",6)="id:6,nome:Letícia,sobrenome:Farias,salario:2450.00,area:UD,deptName:Designer de UI/UX"
-	;^avgByDeptPrepare("area_min",7)="id:7,nome:Fernando,sobrenome:Ramos,salario:2450.00,area:SD,deptName:Desenvolvimento de Software"
-	;^avgByDept("Desenvolvimento de Software")="salaryByDept:4900^qtyByDept:2"
-	;^avgByDept("Designer de UI/UX")="salaryByDept:2450.00^qtyByDept:1"
-	;^avgByDept("Gerenciamento de Software")="salaryByDept:3700.00^qtyByDept:1"
-	;	
 	QUIT	
 	;
 writeMinMax(statisticsId,content,maxMinSalary)
@@ -119,14 +96,14 @@ writeMinMax(statisticsId,content,maxMinSalary)
 	; content:
 	; "{id:3,nome:Bernardo,sobrenome:Costa,salario:3700.00,area:SM}"
 	;
-	SET salary=$$getSalary(content)
+	SET salary=$$getSalary^employeesHelper(content)
 	;	
 	QUIT:salary'=maxMinSalary
 	;	
 	SET firstName=$P($P(content,",",2),":",2)
 	SET lastName=$P($P(content,",",3),":",2)
 	;
-	WRITE statisticsId_"|"_firstName_" "_lastName_"|"_$$formatCurrency(maxMinSalary),!
+	WRITE statisticsId_"|"_firstName_" "_lastName_"|"_$$formatCurrency^employeesHelper(maxMinSalary),!
 	;
 	DO:statisticsId["max" saveByDept("area_max",content)
 	DO:statisticsId["min" saveByDept("area_min",content)
@@ -134,14 +111,14 @@ writeMinMax(statisticsId,content,maxMinSalary)
 	;
 writeAvg(statisticsId,avgSal)
 	;
-	WRITE statisticsId_"|"_$$formatCurrency(avgSal),!
+	WRITE statisticsId_"|"_$$formatCurrency^employeesHelper(avgSal),!
 	QUIT
 	;	
 saveByDept(statisticsId,content)
 	;
 	SET dept=$P($P(content,",",5),":",2)
 	SET deptName=$P($P(^department(dept),",",2),":",2)
-	SET salary=$$getSalary(content)
+	SET salary=$$getSalary^employeesHelper(content)
 	SET id=$P($P(content,",",1),":",2)
 	;	
 	SET ^avgByDeptPrepare(statisticsId,id)=content_",deptName:"_deptName
@@ -159,13 +136,16 @@ saveByDept(statisticsId,content)
 	;	
 	QUIT
 	;	
-getSalary(content)
-	;	
-	SET salary=$P($P(content,",",4),":",2) 
-	QUIT salary
-	;	
-formatCurrency(value)
+saveEmpByDept(content)
 	;
-	SET:value="" value=0
-	QUIT $translate($fnumber(value,",",2),".,",",.")
+	SET deptId=$$getDeptId^employeesHelper(content)
+	SET empByDeptExists=$D(^empByDeptPrepare(deptId))
 	;	
+	IF 'empByDeptExists SET ^empByDeptPrepare(deptId)="empByDeptQty:1"
+	;	
+	IF empByDeptExists DO
+	. SET empByDeptQty=$P(^empByDeptPrepare(deptId),":",2)
+	. SET empByDeptQty=empByDeptQty+1
+	. SET ^empByDeptPrepare(deptId)="empByDeptQty:"_empByDeptQty
+	;	
+	QUIT
