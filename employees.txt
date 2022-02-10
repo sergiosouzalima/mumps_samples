@@ -3,3 +3,10 @@ global_max|Bernardo Costa|3.700,00
 global_min|Letícia Farias|2.450,00
 global_min|Fernando Ramos|2.450,00
 global_avg|2.731,82
+area_max|Gerenciamento de Software|Bernardo Costa|3.700,00
+area_min|Desenvolvimento de Software|Sergio Pinheiro|2.450,00
+area_min|Designer de UI/UX|Letícia Farias|2.450,00
+area_min|Desenvolvimento de Software|Fernando Ramos|2.450,00
+area_avg|Desenvolvimento de Software|2.450,00
+area_avg|Designer de UI/UX|2.450,00
+area_avg|Gerenciamento de Software|3.700,00
