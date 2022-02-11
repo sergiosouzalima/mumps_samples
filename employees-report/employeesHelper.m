@@ -23,6 +23,12 @@ removeBraces(content)
 	;
 	QUIT $translate(content,"{}","")
 	;	
+extractDeptName(content)
+	;
+	IF content["nome:" SET content=$P($P(content,",",2),":",2)
+	;
+	QUIT $$removeBraces(content)
+	;
 getSalary(content)
 	;	
 	SET salary=$P($P(content,",",4),":",2) 

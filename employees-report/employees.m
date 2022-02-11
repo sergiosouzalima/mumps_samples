@@ -78,7 +78,7 @@ saveObj(obj)
 	SET:obj["codigo" objName="department"
 	;	
 	SET:objName="employee" employeeId=employeeId+1,^employee(employeeId)=obj
-	SET:objName="department" deptId=$P($P(obj,",",1),":",2),^department(deptId)=obj
+	SET:objName="department" deptId=$P($P(obj,",",1),":",2),^department(deptId)=$$extractDeptName^employeesHelper(obj)
 	;	
 	QUIT
 	;	

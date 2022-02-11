@@ -1,6 +1,6 @@
 	;
-	zlink "routines/Database"
-	zlink "routines/Department"
+	zlink "Database"
+	zlink "Department"
 	;	
 	SET SEP="^"
 	SET TRUE=1,FALSE=0
@@ -69,6 +69,24 @@
 	. zwrite data
 	ELSE  DO
 	. WRITE !,"Whoops! The Department could not be fetched.",!
+	;
+; fetch Department property name
+	;	
+	SET id="SD"
+	SET deptName=$$fetchProp^Department(id,"name")
+	IF deptName="" DO
+	. WRITE !,"Whoops! The Department name could not be fetched.",!
+	ELSE  DO
+	. WRITE !,"Department name fetched (",deptName,"):",!
+	;
+; fetch Department name
+	;	
+	SET id="SD"
+	SET deptName=$$fetchName^Department(id)
+	IF deptName="" DO
+	. WRITE !,"Whoops! The Department name could not be fetched.",!
+	ELSE  DO
+	. WRITE !,"Department name fetched (",deptName,"):",!
 	;
 ; Drop Database
 	;

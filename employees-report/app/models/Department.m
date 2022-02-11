@@ -10,6 +10,19 @@ fetch(id,data)
 	SET data("name")=$piece(record,SEP,1)
 	QUIT TRUE
 	;
+fetchProp(id,propertyName)
+	IF id="" QUIT ""
+	SET ok=$$fetch(id,.data)
+	IF ok=TRUE QUIT data(propertyName)
+	IF ok=FALSE QUIT ""
+	;
+fetchName(id)
+	NEW name
+	IF id="" QUIT ""
+	SET name=$$fetchProp(id,"name")
+	IF ok=TRUE QUIT name
+	IF ok=FALSE QUIT ""
+	;
 set(id,data)
 	IF id="" QUIT FALSE
 	SET name=$piece(data,SEP,1)

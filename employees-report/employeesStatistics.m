@@ -17,10 +17,10 @@ main
 	KILL ^avgByDeptPrepare,^avgByDept,^empByDeptPrepare
 	;	
 	; Remove "braces" from department content: } and {
-	SET deptAbbr=""
-	FOR i=1:1 SET deptAbbr=$O(^department(deptAbbr)) Q:deptAbbr=""  DO
-	. SET content=$$removeBraces^employeesHelper(^department(deptAbbr))
-	. SET ^department(deptAbbr)=content
+	;SET deptAbbr=""
+	;FOR i=1:1 SET deptAbbr=$O(^department(deptAbbr)) Q:deptAbbr=""  DO
+	;. SET content=$$removeBraces^employeesHelper(^department(deptAbbr))
+	;. SET ^department(deptAbbr)=content
 	;	
 	; Calculate Global & Department Statistics 
 	FOR i=1:1 SET id=$D(^employee(i)) Q:'id  DO
@@ -141,11 +141,13 @@ writeLeastMostEmpByDept(statisticsId,leastMostQty)
 	; ^empByDeptPrepare("SM")="empByDeptQty:2"
 	; ^empByDeptPrepare("UD")="empByDeptQty:3"
 	;	
+	;. SET deptName=$P($P(^department(deptId),",",2),":",2)
+	;	
 	SET deptId=""
 	F i=1:1 SET deptId=$O(^empByDeptPrepare(deptId)) Q:deptId=""  DO
 	. SET content=^empByDeptPrepare(deptId)
 	. SET currentQty=$P(content,":",2)
-	. SET deptName=$P($P(^department(deptId),",",2),":",2)
+	. SET deptName=$$fetchName^Department(deptId)
 	. IF leastMostQty=currentQty DO
 	. . WRITE statisticsId_"|"_deptName_"|"_currentQty,!
 	;	
@@ -154,7 +156,8 @@ writeLeastMostEmpByDept(statisticsId,leastMostQty)
 saveByDept(statisticsId,content)
 	;
 	SET dept=$P($P(content,",",5),":",2)
-	SET deptName=$P($P(^department(dept),",",2),":",2)
+	;SET deptName=$P($P(^department(dept),",",2),":",2)
+	SET deptName=$$fetchName^Department(deptId)
 	SET salary=$$getSalary^employeesHelper(content)
 	SET id=$P($P(content,",",1),":",2)
 	;	

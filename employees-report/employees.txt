@@ -1,0 +1,2 @@
+global_min|Sergio Pinheiro|2.450,00
+Error occurred: 150373978,saveByDept+4^employeesStatistics,%GTM-E-ZLINKFILE, Error while zlinking "Department",%GTM-E-FILENOTFND, File Department not found
