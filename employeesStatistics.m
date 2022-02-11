@@ -65,7 +65,28 @@ writeStatisticsToFile(minSal,maxSal,avgSal)
 	SET deptName=""
 	F i=1:1 SET deptName=$O(^avgByDept(deptName)) Q:deptName=""  DO
 	. DO writeAvgByDept("area_avg",^avgByDept(deptName),deptName)
+	;		
+	; Get department with least and most employees
+	SET leastEmployeesByDeptQty=0
+	SET leastEmployeesByDeptId=""
+	SET mostEmployeesByDeptQty=999999
+	SET mostEmployeesByDeptId=""
+	;	
+	SET mostQty=0
+	SET leastQty=99999999
 	;			
+	SET deptId=""
+	F i=1:1 SET deptId=$O(^empByDeptPrepare(deptId)) Q:deptId=""  DO
+	. SET content=^empByDeptPrepare(deptId)
+	. SET currentQty=$P(content,":",2)
+	. IF currentQty>mostQty DO
+	. . SET mostQty=currentQty
+	. IF currentQty<leastQty DO
+	. . SET leastQty=currentQty
+	;
+	DO writeLeastMostEmpByDept("least_employees",leastQty)
+	;
+	DO writeLeastMostEmpByDept("most_employees",mostQty)
 	;
 	CLOSE fileName
 	QUIT	
@@ -112,6 +133,22 @@ writeMinMax(statisticsId,content,maxMinSalary)
 writeAvg(statisticsId,avgSal)
 	;
 	WRITE statisticsId_"|"_$$formatCurrency^employeesHelper(avgSal),!
+	QUIT
+	;	
+writeLeastMostEmpByDept(statisticsId,leastMostQty)
+	;
+	; ^empByDeptPrepare("SD")="empByDeptQty:6"
+	; ^empByDeptPrepare("SM")="empByDeptQty:2"
+	; ^empByDeptPrepare("UD")="empByDeptQty:3"
+	;	
+	SET deptId=""
+	F i=1:1 SET deptId=$O(^empByDeptPrepare(deptId)) Q:deptId=""  DO
+	. SET content=^empByDeptPrepare(deptId)
+	. SET currentQty=$P(content,":",2)
+	. SET deptName=$P($P(^department(deptId),",",2),":",2)
+	. IF leastMostQty=currentQty DO
+	. . WRITE statisticsId_"|"_deptName_"|"_currentQty,!
+	;	
 	QUIT
 	;	
 saveByDept(statisticsId,content)
