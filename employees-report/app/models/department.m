@@ -16,32 +16,37 @@
 	;
 set(id,data)
 	IF id="" QUIT FALSE
-	SET name=$piece(data,SEP,1)
-	SET ^departments(id)=name
+	SET deptName=$piece(data,SEP,1)
+	SET ^departments(id)=deptName
 	QUIT TRUE
 	;	
-fetch(id,data)
+create(id,data)
+	;
+	QUIT $$set(id,data)
+	;
+update(id,data)
+	;
+	QUIT $$set(id,data)
+	;
+get(id,data)
 	NEW record
 	KILL data
 	IF id="" QUIT FALSE
 	SET record=$get(^departments(id))
-	SET data("name")=$piece(record,SEP,1)
+	SET data("deptName")=$piece(record,SEP,1)
 	QUIT TRUE
 	;
-fetchProp(id,propertyName)
+getProp(id,propertyName)
 	IF id="" QUIT ""
-	SET ok=$$fetch(id,.data)
+	SET ok=$$get(id,.data)
 	IF ok QUIT data(propertyName)
 	IF 'ok QUIT ""
 	;
-fetchName(id)
-	NEW name
-	IF id="" QUIT ""
-	SET name=$$fetchProp(id,"name")
-	IF ok QUIT name
-	IF 'ok QUIT ""
+getDeptName(id)
 	;
-remove(id)
+	QUIT $$getProp(id,"deptName")
+	;
+delete(id)
 	IF id="" QUIT FALSE
 	KILL ^departments(id)
 	QUIT TRUE

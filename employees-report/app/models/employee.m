@@ -11,7 +11,7 @@
 	; ^employees(1)="Washington^Ramos^2700.00^SD"
 	; ^employees(2)="Wilson^Silva^3200.00^SM"
 	;	
-	;	
+	;		
 	SET SEP="^"
 	SET TRUE=1,FALSE=0
 	;	
@@ -32,7 +32,7 @@ update(id,data)
 	;
 	QUIT $$set(id,data)
 	;
-fetch(id,data)
+get(id,data)
 	NEW record
 	KILL data
 	IF id="" QUIT FALSE
@@ -43,18 +43,28 @@ fetch(id,data)
 	SET data("deptId")=$piece(record,SEP,4)
 	QUIT TRUE
 	;
-fetchProp(id,propertyName)
+getProp(id,propertyName)
 	IF id="" QUIT ""
-	SET ok=$$fetch(id,.data)
+	SET ok=$$get(id,.data)
 	IF ok QUIT data(propertyName)
 	IF 'ok QUIT ""
 	;
-fetchEmployeeName(id)
-	NEW employeeName
-	IF id="" QUIT ""
-	SET employeeName=$$fetchProp(id,"employeeName")
-	IF ok QUIT employeeName
-	IF 'ok QUIT ""
+getEmployeeName(id)
+	;
+	QUIT $$getProp(id,"employeeName")
+	;
+getEmployeeLastName(id)
+	;
+	QUIT $$getProp(id,"employeeLastName")
+	;
+getEmployeeDeptId(id)
+	;
+	QUIT $$getProp(id,"deptId")
+	;
+getEmployeeDeptName(id)
+	;
+	SET deptId=$$getEmployeeDeptId(id)
+	QUIT $$getDeptName^department(deptId)
 	;
 delete(id)
 	IF id="" QUIT FALSE
