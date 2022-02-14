@@ -1,6 +1,10 @@
+	; Employees' Statistics Report. ;
 	;
-	zlink "../../app/models/database"
-	zlink "../../app/models/department"
+	; File mame: departmentTests.m
+	; Author: Sergio Lima (Feb, 14 2022)
+	; How to run: mumps -r main^departmentTests
+	;
+	; Made with GT.M Mumps for Linux. ;
 	;	
 main()
 	;

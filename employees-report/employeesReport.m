@@ -1,14 +1,14 @@
 	; Employees' Statistics Report. ;
 	;
-	; File mame: employees.m
-	; Author: Sergio Lima (Feb, 9 2022)
-	; How to run: mumps -r ^employees
+	; File mame: employeesReport.m
+	; Author: Sergio Lima (Feb, 13 2022)
+	; How to run: mumps -r main^employeesReport
 	;
 	; Made with GT.M Mumps for Linux. ;
-	;
+	;	
+main
 	DO Initialize
 	DO jsonToFile(jsonFileName)
-	;	
 	DO generateStatistics
 	DO Finalize
 	QUIT
@@ -17,10 +17,11 @@ Initialize
 	;
 	WRITE #,!,"*** Employees' Statistics Report ***",!!
 	SET TRUE=1,FALSE=0
-	SET jsonFileName="funcionarios.json" ;"funcionarios-5M.json" ;"funcionarios-10K.json" ;"funcionarios-30M.json" ; "funcionarios.json" ;
+	SET SEP="^"
+	SET jsonFileName="assets/funcionarios.json" ;""assets/funcionarios-5M.json" ;funcionarios-5M.json" ;"funcionarios-10K.json" ;"funcionarios-30M.json" ; "funcionarios.json" ;
 	SET maxStringSize=1024*1024 ; the maximum GT.M string size
 	SET employeeId=0,departmentId=0,debugId=0
-	KILL ^employee,^department,^debug
+	KILL ^employees,^departments,^debug
 	QUIT
 	;
 Finalize
@@ -77,8 +78,10 @@ saveObj(obj)
 	SET objName="employee"
 	SET:obj["codigo" objName="department"
 	;	
-	SET:objName="employee" employeeId=employeeId+1,^employee(employeeId)=obj
-	SET:objName="department" deptId=$P($P(obj,",",1),":",2),^department(deptId)=$$extractDeptName^employeesHelper(obj)
+	;SET:objName="employee" employeeId=employeeId+1,^employee(employeeId)=obj
+	SET:objName="employee" employeeId=$P($P(obj,",",1),":",2),^employees(employeeId)=$$extractEmployeeFields^helper(obj)
+	;	
+	SET:objName="department" deptId=$P($P(obj,",",1),":",2),^departments(deptId)=$$extractDeptName^helper(obj)
 	;	
 	QUIT
 	;	

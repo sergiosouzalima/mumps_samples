@@ -3,20 +3,20 @@
 	; File mame: employeesHelper.m
 	;
 	; Author: Sergio Lima (Feb, 9 2022)
-	; How to run: mumps -r ^employees
+	; How to run: mumps -r main^employeesReport
 	;
 	; Made with GT.M Mumps for Linux. ;
 	;
-getMaxSalary(content,maxSal)
+getMaxSalary(salaryValue,maxSal)
 	;	
-	SET currentSal=$$getSalary(content)
-	SET:currentSal>maxSal maxSal=currentSal
+	;SET currentSal=maxSal ;$$getSalary(content)
+	SET:salaryValue>maxSal maxSal=salaryValue
 	QUIT maxSal
 	;	
-getMinSalary(content,minSal)
+getMinSalary(salaryValue,minSal)
 	;	
-	SET currentSal=$$getSalary(content)
-	SET:currentSal<minSal minSal=currentSal
+	;SET currentSal=minSal ;$$getSalary(content)
+	SET:salaryValue<minSal minSal=salaryValue
 	QUIT minSal
 	;	
 removeBraces(content)
@@ -28,6 +28,14 @@ extractDeptName(content)
 	IF content["nome:" SET content=$P($P(content,",",2),":",2)
 	;
 	QUIT $$removeBraces(content)
+	;
+extractEmployeeFields(content)
+	; {id:1,nome:Aahron,sobrenome:Abaine,salario:24048.75,area:A2}
+	;
+	SET content=$$removeBraces(content)
+	SET content=$P($P(content,",",2),":",2)_"^"_$P($P(content,",",3),":",2)_"^"_$P($P(content,",",4),":",2)_"^"_$P($P(content,",",5),":",2)
+	SET content="{"_content_"}"
+	QUIT content
 	;
 getSalary(content)
 	;	

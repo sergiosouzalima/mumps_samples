@@ -6,7 +6,7 @@
 	;
 	; Made with GT.M Mumps for Linux. ;
 	;
-	; ^employees(id)="employeeName^employeeLastName^salaryValue^deptId"
+	; ^employees(id)="employeeFirstName^employeeLastName^salaryValue^deptId"
 	;
 	; ^employees(1)="Washington^Ramos^2700.00^SD"
 	; ^employees(2)="Wilson^Silva^3200.00^SM"
@@ -37,7 +37,7 @@ get(id,data)
 	KILL data
 	IF id="" QUIT FALSE
 	SET record=$get(^employees(id))
-	SET data("employeeName")=$piece(record,SEP,1)
+	SET data("employeeFirstName")=$piece(record,SEP,1)
 	SET data("employeeLastName")=$piece(record,SEP,2)
 	SET data("salaryValue")=$piece(record,SEP,3)
 	SET data("deptId")=$piece(record,SEP,4)
@@ -53,6 +53,10 @@ getEmployeeName(id)
 	;
 	QUIT $$getProp(id,"employeeName")
 	;
+getEmployeeFirstName(id)
+	;
+	QUIT $$getProp(id,"employeeFirstName")
+	;
 getEmployeeLastName(id)
 	;
 	QUIT $$getProp(id,"employeeLastName")
@@ -60,6 +64,10 @@ getEmployeeLastName(id)
 getEmployeeDeptId(id)
 	;
 	QUIT $$getProp(id,"deptId")
+	;
+getEmployeeSalaryValue(id)
+	;
+	QUIT $$getProp(id,"salaryValue")
 	;
 getEmployeeDeptName(id)
 	;

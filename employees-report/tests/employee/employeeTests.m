@@ -1,6 +1,10 @@
+	; Employees' Statistics Report. ;
 	;
-	zlink "../../app/models/database"
-	zlink "../../app/models/employee"
+	; File mame: employeeTests.m
+	; Author: Sergio Lima (Feb, 14 2022)
+	; How to run: mumps -r main^employeeTests
+	;
+	; Made with GT.M Mumps for Linux. ;
 	;	
 main()
 	;
@@ -11,11 +15,12 @@ main()
 	DO update(2,"Williams^Akron^2700.00^SD") 
 	DO get(1)
 	DO delete(1)
-	DO getProp(2,"employeeName")
-	DO getEmployeeName(2)
+	DO getProp(2,"employeeFirstName")
+	DO getEmployeeFirstName(2)
 	DO getEmployeeLastName(2)
 	DO getEmployeeDeptId(2)
 	DO getEmployeeDeptName(2)
+	DO getEmployeeSalaryValue(2)
 	;	
 	DO tearDown()
 	QUIT
@@ -97,10 +102,10 @@ getProp(id,propertyName)
 	;	
 	QUIT
 	;
-getEmployeeName(id)
+getEmployeeFirstName(id)
 	;
-	SET operationName="get by Name Property"
-	SET content=$$getEmployeeName^employee(id)
+	SET operationName="get by First Name Property"
+	SET content=$$getEmployeeFirstName^employee(id)
 	SET ok=("Williams"=content)
 	DO showResult(operationName,ok,id,content)
 	;	
@@ -126,7 +131,7 @@ getEmployeeDeptId(id)
 	;
 getEmployeeDeptName(id)
 	;
-	SET operationName="get by deptName Property"
+	SET operationName="get by Department Name Property"
 	;	
 	SET ok=$$create^department("SD","Software Development")
 	;	
@@ -136,3 +141,11 @@ getEmployeeDeptName(id)
 	;	
 	QUIT
 	;
+getEmployeeSalaryValue(id)
+	;
+	SET operationName="get by Employee Salary Value Property"
+	SET content=$$getEmployeeSalaryValue^employee(id)
+	SET ok=("2700.00"=content)
+	DO showResult(operationName,ok,id,content)
+	;	
+	QUIT
