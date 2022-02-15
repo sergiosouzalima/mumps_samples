@@ -9,13 +9,11 @@
 	;
 getMaxSalary(salaryValue,maxSal)
 	;	
-	;SET currentSal=maxSal ;$$getSalary(content)
 	SET:salaryValue>maxSal maxSal=salaryValue
 	QUIT maxSal
 	;	
 getMinSalary(salaryValue,minSal)
 	;	
-	;SET currentSal=minSal ;$$getSalary(content)
 	SET:salaryValue<minSal minSal=salaryValue
 	QUIT minSal
 	;	
@@ -37,16 +35,6 @@ extractEmployeeFields(content)
 	SET content="{"_content_"}"
 	QUIT content
 	;
-getSalary(content)
-	;	
-	SET salary=$P($P(content,",",4),":",2) 
-	QUIT salary
-	;	
-getDeptId(content)
-	;	
-	SET deptId=$P($P(content,",",5),":",2) 
-	QUIT deptId
-	;	
 formatCurrency(value)
 	;
 	SET:value="" value=0

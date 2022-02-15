@@ -17,19 +17,6 @@ main
 	;	
 	KILL ^avgByDeptPrepare,^avgByDept,^empByDeptPrepare,^debug
 	;
-	;. SET content=$$removeBraces^helper(^employees(id))
-	;	
-	; Calculate Global & Department Statistics 
-	;SET id=""
-	;FOR i=1:1 SET id=$O(^employees(id)) Q:id=""  DO
-	;. SET content=^employees(id)
-	;. SET maxSal=$$getMaxSalary^helper(content,maxSal)
-	;. SET minSal=$$getMinSalary^helper(content,minSal)
-	;. SET sumSal=sumSal+$$getSalary^helper(content)
-	;. SET ^employees(id)=content
-	;. DO saveEmpByDept(content)
-	;
-	;QUIT
 	SET id=""
 	FOR i=1:1 SET id=$O(^employees(id)) Q:id=""  DO
 	. SET employeeCounter=$Increment(employeeCounter)
@@ -41,8 +28,6 @@ main
 	. SET sumSal=sumSal+salaryValue
 	. DO saveEmpByDept(id)
 	;	
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="sumSal:"_sumSal
 	; Write Statistics to file
 	SET:employeeCounter>0 avgSal=sumSal/employeeCounter
 	DO writeStatisticsToFile(minSal,maxSal,avgSal)
@@ -55,16 +40,10 @@ writeStatisticsToFile(minSal,maxSal,avgSal)
 	OPEN fileName:(newversion:stream:nowrap:chset="M")
 	USE fileName
 	;
-	;S debugCounter=debugCounter+1
-;	S ^debug(debugCounter)="writeStatisticsToFile:"_minSal_"^"_maxSal_"^"_avgSal
-	;	
 	SET id=""
 	FOR i=1:1 SET id=$O(^employees(id)) Q:id=""  DO 
 	. DO writeMinMax("global_max",id,maxSal)
 	. DO writeMinMax("global_min",id,minSal)	
-	;	
-	;. DO writeMinMax("global_max",^employees(id),maxSal)
-	;. DO writeMinMax("global_min",^employees(id),minSal)
 	;	
 	DO writeAvg("global_avg",avgSal)
 	;			
@@ -111,19 +90,11 @@ writeStatisticsToFile(minSal,maxSal,avgSal)
 	;
 writeMinMaxByDept(statisticsId,content)
 	;
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="writeMinMaxByDept:"_content
-	;
 	SET firstName=$P(content,"^",1)
 	SET lastName=$P(content,"^",2)
 	SET salary=$P(content,"^",3)
 	SET deptName=$P(content,"^",4)
 	;
-	;SET deptName=$P($P(content,",",6),":",2)
-	;SET firstName=$P($P(content,",",2),":",2)
-	;SET lastName=$P($P(content,",",3),":",2)
-	;SET salary=$P($P(content,",",4),":",2)
-	;	
 	WRITE statisticsId_"|"_deptName_"|"_firstName_" "_lastName_"|"_$$formatCurrency^helper(salary),!
 	;
 	QUIT	
@@ -140,37 +111,15 @@ writeAvgByDept(statisticsId,content,deptName)
 	;
 writeMinMax(statisticsId,employeeId,maxMinSalary)
 	;
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="writeMinMax:"_employeeId_"^"_maxMinSalary
-	;
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="Before calling saveByDept 0: "_"^"_employeeId
-	;
-	;	
-	;SET salary=$$getSalary^helper(content)
 	SET salaryValue=$$getEmployeeSalaryValue^employee(employeeId)
 	;	
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="Before calling saveByDept 0.5: "_"^"_salaryValue_"^"_maxMinSalary
-	;
 	QUIT:salaryValue'=maxMinSalary
-	;	
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="Before calling saveByDept 1: "_"^"_maxMinSalary
 	;
 	SET employeeFirstName=$$getEmployeeFirstName^employee(employeeId)
 	SET employeeLastName=$$getEmployeeLastName^employee(employeeId)
 	SET employeeDeptId=$$getEmployeeDeptId^employee(employeeId)
-	;SET firstName=$P($P(content,",",2),":",2)
-	;SET lastName=$P($P(content,",",3),":",2)
-	;	
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="Before calling saveByDept 1.5: "_"^"_employeeFirstName_"^"_employeeLastName_"^"_employeeDeptId
 	;
 	WRITE statisticsId_"|"_employeeFirstName_" "_employeeLastName_"|"_$$formatCurrency^helper(maxMinSalary),!
-	;
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="Before calling saveByDept 2: "_"^"_employeeId_"^"_employeeDeptId_"^"_salaryValue
 	;
 	DO:statisticsId["max" saveByDept("area_max",employeeId,employeeDeptId,salaryValue)
 	DO:statisticsId["min" saveByDept("area_min",employeeId,employeeDeptId,salaryValue)
@@ -187,21 +136,13 @@ writeLeastMostEmpByDept(statisticsId,leastMostQty)
 	F i=1:1 SET deptId=$O(^empByDeptPrepare(deptId)) Q:deptId=""  DO
 	. SET content=^empByDeptPrepare(deptId)
 	. SET currentQty=$P(content,":",2)
-	. SET deptName=$$getDeptName^department(deptId) ;SET deptName=$$fetchName^Departments(deptId)
+	. SET deptName=$$getDeptName^department(deptId)
 	. IF leastMostQty=currentQty DO
 	. . WRITE statisticsId_"|"_deptName_"|"_currentQty,!
 	;	
 	QUIT
 	;	
 saveByDept(statisticsId,employeeId,employeeDeptId,salaryValue)
-	;
-	;SET dept=$P($P(content,",",5),":",2)
-	;SET deptName=$$fetchName^Departments(deptId)
-	;SET salary=$$getSalary^helper(content)
-	;SET id=$P($P(content,",",1),":",2)
-	;	
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="saveByDept: "_"^"_statisticsId_"^"_employeeId_"^"_employeeDeptId_"^"_salaryValue
 	;	
 	SET deptName=$$getDeptName^department(employeeDeptId)
 	;	
@@ -210,10 +151,6 @@ saveByDept(statisticsId,employeeId,employeeDeptId,salaryValue)
 	SET employeeLastName=$$getEmployeeLastName^employee(employeeId)
 	SET content=employeeFirstName_"^"_employeeLastName_"^"_salaryValue
 	;	
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)=deptName
-	;	
-	;SET ^avgByDeptPrepare(statisticsId,employeeId)=content_",deptName:"_deptName
 	SET ^avgByDeptPrepare(statisticsId,employeeId)=content_"^"_deptName
 	;	
 	SET avgByDeptExists=$D(^avgByDept(deptName))
@@ -231,12 +168,6 @@ saveByDept(statisticsId,employeeId,employeeDeptId,salaryValue)
 	;	
 saveEmpByDept(id)
 	;
-	;S debugCounter=debugCounter+1
-	;S ^debug(debugCounter)="saveEmpByDept: "_"^"_id
-	;
-	;S deptId=$$getEmployeeDeptId^employee(id)
-	;	
-	;SET deptId=$$getDeptId^helper(content)
 	SET exists=$D(^empByDeptPrepare(deptId))
 	;	
 	IF 'exists SET ^empByDeptPrepare(deptId)="empByDeptQty:1"
