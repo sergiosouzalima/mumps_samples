@@ -1,6 +1,6 @@
 	; Employees' Statistics Report. ;
 	;
-	; File mame: employeesStatistics.m
+	; File mame: employeesCalculate.m
 	; Author: Sergio Lima (Feb, 9 2022)
 	; How to run: mumps -r main^employeesReport
 	;
@@ -9,22 +9,35 @@
 main
 	SET maxSal=0
 	SET minSal=999999
+	SET maxSalByDept=0
+	SET minSalByDept=999999
 	SET sumSal=0
 	SET avgSal=0
 	SET content=""
 	SET employeeCounter=0
+	SET generalCounter=0
 	SET debugCounter=0
 	;	
-	KILL ^avgByDeptPrepare,^avgByDept,^empByDeptPrepare,^debug
+	KILL ^avgByDeptPrepare,^avgByDept,^empByDeptPrepare,^debug,^SalaryDept,^Salary,^SalaryLastName
 	;
 	SET id=""
 	FOR i=1:1 SET id=$O(^employees(id)) Q:id=""  DO
 	. SET employeeCounter=$Increment(employeeCounter)
-	. SET content=$$removeBraces^helper(^employees(id))
-	. SET ok=$$update^employee(id,content)
+	. SET employeeData=$$removeBraces^helper(^employees(id))
+	. SET ok=$$update^employee(id,employeeData)
 	. SET salaryValue=$$getEmployeeSalaryValue^employee(id)
 	. SET maxSal=$$getMaxSalary^helper(salaryValue,maxSal)
 	. SET minSal=$$getMinSalary^helper(salaryValue,minSal)
+	. SET deptName=$$getEmployeeDeptName^employee(id)
+	. SET employeeFullName=$$getEmployeeFullName^employee(id)
+	. SET employeeLastName=$$getEmployeeLastName^employee(id)
+	. ;
+	. SET generalCounter=$Increment(generalCounter)
+	. SET ^SalaryDept(deptName,salaryValue,generalCounter)=id_"^"_employeeData
+	. SET ^Salary(salaryValue,generalCounter)=id_"^"_employeeData
+	. SET ^SalaryLastName(employeeLastName,generalCounter,salaryValue)=id_"^"_
+	. employeeData
+	. ;
 	. SET sumSal=sumSal+salaryValue
 	. DO saveEmpByDept(id)
 	;	

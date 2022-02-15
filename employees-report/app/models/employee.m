@@ -61,6 +61,10 @@ getEmployeeLastName(id)
 	;
 	QUIT $$getProp(id,"employeeLastName")
 	;
+getEmployeeFullName(id)
+	;
+	QUIT $$getEmployeeFirstName(id)_" "_$$getEmployeeLastName(id)
+	;
 getEmployeeDeptId(id)
 	;
 	QUIT $$getProp(id,"deptId")

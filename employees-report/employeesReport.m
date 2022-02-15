@@ -8,7 +8,7 @@
 	;	
 main
 	DO Initialize
-	DO jsonToFile(jsonFileName)
+	DO jsonToFile
 	DO generateStatistics
 	DO Finalize
 	QUIT
@@ -19,6 +19,7 @@ Initialize
 	SET TRUE=1,FALSE=0
 	SET SEP="^"
 	SET jsonFileName="assets/funcionarios.json" ;""assets/funcionarios-5M.json" ;funcionarios-5M.json" ;"funcionarios-10K.json" ;"funcionarios-30M.json" ; "funcionarios.json" ;
+	SET reportFileName="employeesReport.txt"
 	SET maxStringSize=1024*1024 ; the maximum GT.M string size
 	SET employeeId=0,departmentId=0,debugId=0
 	KILL ^employees,^departments,^debug
@@ -29,18 +30,18 @@ Finalize
 	W !,"END RUN ****",!!
 	QUIT
 	;
-jsonToFile(jsonFile)
+jsonToFile
 	;	
-	OPEN jsonFile:(readonly:recordsize=maxStringSize)
+	OPEN jsonFileName:(readonly:recordsize=maxStringSize)
 	;	
 	SET employeeId=0
 	SET departmentId=0
 	SET previousLine=""
 	;	
-	FOR i=1:1 QUIT:$zeof  SET previousLine=$$processLine(jsonFile,previousLine)
+	FOR i=1:1 QUIT:$zeof  SET previousLine=$$processLine(jsonFileName,previousLine)
 	;	
 	USE $principal
-	CLOSE jsonFile
+	CLOSE jsonFileName
 	;	
 	QUIT
 	;	
@@ -94,7 +95,7 @@ cleanLine(line)
 	;	
 generateStatistics
 	;
-	DO main^employeesStatistics
+	DO main^employeesCalculate(reportFileName)
 	;	
 	QUIT
 	;	

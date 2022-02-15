@@ -1,0 +1,5 @@
+global_max|Bernardo Costa|3.700,00
+global_min|Sergio Pinheiro|2.450,00
+global_min|Letícia Farias|2.450,00
+global_min|Fernando Ramos|2.450,00
+global_avg|2.731,82
