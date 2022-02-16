@@ -80,12 +80,10 @@ saveObj(obj)
 	SET:obj["codigo" objName="department"
 	SET id=$P($P(obj,",",1),":",2)
 	;	
-	;SET:objName="employee" employeeId=$P($P(obj,",",1),":",2),^employees(employeeId)=$$extractEmployeeFields^helper(obj)
 	IF objName="employee"  DO
 	. SET content=$$extractEmployeeFields^helper(obj)
 	. SET ok=$$create^employee(id,content)
 	;	
-	;SET:objName="department" deptId=$P($P(obj,",",1),":",2),^departments(deptId)=$$extractDeptName^helper(obj)
 	IF objName="department"  DO
 	. SET content=$$extractDeptName^helper(obj)
 	. SET ok=$$create^department(id,content)
