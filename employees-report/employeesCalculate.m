@@ -27,14 +27,13 @@ main(reportFileName)
 	. SET salaryValue=$$getEmployeeSalaryValue^employee(employeeId)
 	. ; Set main work globals
 	. SET generalId=$Increment(generalId)
-	. SET ^SalaryDept(deptId,generalId,salaryValue)=employeeId
-	. ;SET ^SalaryDept(deptId,salaryValue)=0
+	. SET ^SalaryDept(deptId,employeeId,salaryValue)=""
 	. SET ^Salary(salaryValue,generalId)=employeeId
 	. SET ^SalaryLastName(employeeLastName,generalId,salaryValue)=employeeId_"^"_employeeData
-	. ; Calcule global max & min salary 
+	. ; Calculate global max & min salary 
 	. SET maxSal=$$getMaxSalary^helper(salaryValue,maxSal)
 	. SET minSal=$$getMinSalary^helper(salaryValue,minSal)
-	. ; Calcule global average salary 
+	. ; Calculate global average salary 
 	. SET employeeCounter=$Increment(employeeCounter)
 	. SET sumSal=sumSal+salaryValue
 	;	
