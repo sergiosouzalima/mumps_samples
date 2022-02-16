@@ -43,7 +43,6 @@ generateSalaryDeptAvg()
 	;
 	SET deptId=""
 	FOR i=1:1 SET deptId=$O(^departments(deptId)) Q:deptId=""  DO
-	. ;SET generalId=""
 	. SET employeeId=""
 	. SET sumSal=0
 	. SET employeeCounter=0
@@ -72,8 +71,8 @@ generateSalaryDeptMaxMin()
 	. . SET salaryValue=""
 	. . FOR k=1:1 SET salaryValue=$O(^SalaryDept(deptId,employeeId,salaryValue)) Q:salaryValue=""  DO
 	. . . ; Calcule max & min salary by department
-	. . . SET maxSal=$$getMaxSalary^helper(salaryValue,maxSal)
-	. . . SET minSal=$$getMinSalary^helper(salaryValue,minSal)
+	. . . SET maxSal=$$getMaxValue^helper(salaryValue,maxSal)
+	. . . SET minSal=$$getMinValue^helper(salaryValue,minSal)
 	. . SET ^SalaryDeptMaxMin(deptId,maxSal)="area_max"
 	. . SET ^SalaryDeptMaxMin(deptId,minSal)="area_min"
 	;	

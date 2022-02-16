@@ -25,14 +25,16 @@ main(reportFileName)
 	. SET deptId=$$getEmployeeDeptId^employee(employeeId)
 	. SET employeeLastName=$$getEmployeeLastName^employee(employeeId)	
 	. SET salaryValue=$$getEmployeeSalaryValue^employee(employeeId)
+	. ; Add employee+1 to Department
+	. SET ok=$$incEmployeeQty^department(deptId)
 	. ; Set main work globals
 	. SET generalId=$Increment(generalId)
 	. SET ^SalaryDept(deptId,employeeId,salaryValue)=""
 	. SET ^Salary(salaryValue,generalId)=employeeId
 	. SET ^SalaryLastName(employeeLastName,generalId,salaryValue)=employeeId_"^"_employeeData
 	. ; Calculate global max & min salary 
-	. SET maxSal=$$getMaxSalary^helper(salaryValue,maxSal)
-	. SET minSal=$$getMinSalary^helper(salaryValue,minSal)
+	. SET maxSal=$$getMaxValue^helper(salaryValue,maxSal)
+	. SET minSal=$$getMinValue^helper(salaryValue,minSal)
 	. ; Calculate global average salary 
 	. SET employeeCounter=$Increment(employeeCounter)
 	. SET sumSal=sumSal+salaryValue
@@ -40,6 +42,8 @@ main(reportFileName)
 	DO main^employeesCalcGlobalSalary(reportFileName,maxSal,minSal,sumSal,employeeCounter)
 	;			
 	DO main^employeesCalcDeptSalary(reportFileName)
+	;	
+	DO main^employeesCalcMostLeastEmployee(reportFileName)
 	;	
 	QUIT
 	;	

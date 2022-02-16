@@ -14,3 +14,8 @@ area_avg|Gerenciamento de Software|3.450,00
 area_max|Designer de UI/UX|Washington Ramos|2.700,00
 area_min|Designer de UI/UX|Letícia Farias|2.450,00
 area_avg|Designer de UI/UX|2.566,67
+most_employees|Desenvolvimento de Software|6
+least_employees|Gerenciamento de Software|2
+
+END RUN ****
+

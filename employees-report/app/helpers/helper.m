@@ -7,15 +7,15 @@
 	;
 	; Made with GT.M Mumps for Linux. ;
 	;
-getMaxSalary(salaryValue,maxSal)
+getMaxValue(value,maxValue)
 	;	
-	SET:salaryValue>maxSal maxSal=salaryValue
-	QUIT maxSal
+	SET:value>maxValue maxValue=value
+	QUIT maxValue
 	;	
-getMinSalary(salaryValue,minSal)
+getMinValue(value,minValue)
 	;	
-	SET:salaryValue<minSal minSal=salaryValue
-	QUIT minSal
+	SET:value<minValue minValue=value
+	QUIT minValue
 	;	
 removeBraces(content)
 	;

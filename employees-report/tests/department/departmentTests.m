@@ -17,6 +17,8 @@ main()
 	DO delete("SD")
 	DO getProp("SM","deptName")
 	DO getDeptName("SM")
+	DO getEmployeeQty("SM")
+	DO incEmployeeQty("SM")
 	;	
 	DO tearDown()
 	QUIT
@@ -105,4 +107,20 @@ getDeptName(id)
 	;	
 	QUIT
 	;
+getEmployeeQty(id)
+	;
+	SET operationName="get by Employee Qty Property"
+	SET content=$$getEmployeeQty^department(id)
+	SET ok=("0"=content)
+	DO showResult(operationName,ok,id,content)
+	;	
+	QUIT
+	;
+incEmployeeQty(id)
+	;
+	SET operationName="increment EmployeeQty Property to Department"
+	SET ok=$$incEmployeeQty^department(id)
+	DO showResult(operationName,ok,id,"")
+	;	
+	QUIT
 	;
