@@ -1,30 +1,9 @@
 global_max|Aahron Galvan|99.993,96
 global_min|Aakash Brino|1,96
 global_avg|49.648,19
-area_min|Área 1|Aahron Abate|64.106,68
-area_max|Área 1|Aahron Abato|89.912,17
-area_min|Área 1|Aahron Abaurre|7.616,62
-area_max|Área 1|Aahron Abella|98.234,52
-area_max|Área 1|Aahron Acord|99.613,87
-area_min|Área 1|Aahron Addonizio|2.616,72
-area_min|Área 1|Aahron Affinito|1.419,30
-area_min|Área 1|Aahron Agosto|157,26
-area_max|Área 1|Aahron Angelo|99.883,78
-area_min|Área 1|Aahron Blasier|42,40
-area_min|Área 1|Aahron Cornacchia|22,88
 area_max|Área 1|Aahron Galvan|99.993,96
 area_min|Área 1|Aakash Brino|1,96
 area_avg|Área 1|49.731,80
-area_min|Área 2|Aahron Abaine|24.048,75
-area_max|Área 2|Aahron Abreu|42.742,86
-area_max|Área 2|Aahron Adorno|97.558,81
-area_min|Área 2|Aahron Alba|21.808,00
-area_min|Área 2|Aahron Alessi|5.187,09
-area_max|Área 2|Aahron Baiense|98.679,84
-area_min|Área 2|Aahron Bara|2.952,95
-area_min|Área 2|Aahron Betit|1.096,73
-area_max|Área 2|Aahron Boisclair|99.433,88
-area_min|Área 2|Aahron Strabelli|243,89
 area_min|Área 2|Aakash Agosti|137,82
 area_max|Área 2|Aakash Bracci|99.884,08
 area_avg|Área 2|48.646,04

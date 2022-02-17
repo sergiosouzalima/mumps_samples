@@ -58,9 +58,12 @@ generateSalaryDeptAvg()
 generateSalaryDeptMaxMin()
 	;	
 	; Read all Departments. Create list with Max & Min employees' salaries by department. ;
-	; ^SalaryDeptAvg("SD")="2.575,00"
-	; ^SalaryDeptAvg("SM")="3.450,00"
-	; ^SalaryDeptAvg("UD")="2.566,67"
+	;	
+	; ^SalaryDept(deptId,employeeId,salaryValue)
+	; ^SalaryDept("A2",9959,93512.41)=""
+	; ^SalaryDept("A2",9972,33557.67)=""
+	; ^SalaryDept("A2",9985,28209.92)=""
+	; ^SalaryDept("A2",9998,"40740.60")=""
 	;
 	SET deptId=""
 	FOR i=1:1 SET deptId=$O(^departments(deptId)) Q:deptId=""  DO
@@ -73,8 +76,8 @@ generateSalaryDeptMaxMin()
 	. . . ; Calcule max & min salary by department
 	. . . SET maxSal=$$getMaxValue^helper(salaryValue,maxSal)
 	. . . SET minSal=$$getMinValue^helper(salaryValue,minSal)
-	. . SET ^SalaryDeptMaxMin(deptId,maxSal)="area_max"
-	. . SET ^SalaryDeptMaxMin(deptId,minSal)="area_min"
+	. SET ^SalaryDeptMaxMin(deptId,maxSal)="area_max"
+	. SET ^SalaryDeptMaxMin(deptId,minSal)="area_min"
 	;	
 	QUIT	
 	;
