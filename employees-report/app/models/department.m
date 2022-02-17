@@ -40,7 +40,6 @@ get(id,data)
 	QUIT TRUE
 	;
 incEmployeeQty(id)
-	NEW record
 	KILL data
 	IF id="" QUIT FALSE
 	QUIT:'$$get(id,.data) FALSE

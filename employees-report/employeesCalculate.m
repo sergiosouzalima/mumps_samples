@@ -15,7 +15,7 @@ main(reportFileName)
 	SET sumSal=0
 	SET employeeCounter=0
 	;	
-	KILL ^Salary,^SalaryDept,^SalaryLastName
+	KILL ^Salary,^SalaryDept,^SalaryLastName,^LastNameMax
 	;	
 	FOR i=1:1 SET employeeId=$O(^employees(employeeId)) Q:employeeId=""  DO
 	. ; Clean employees data
@@ -38,6 +38,8 @@ main(reportFileName)
 	. ; Calculate global average salary 
 	. SET employeeCounter=$Increment(employeeCounter)
 	. SET sumSal=sumSal+salaryValue
+	. ; Calculate max salary by employee last name
+	. SET ok=$$set^employeeLastNameMax(employeeLastName,salaryValue)
 	;	
 	DO main^employeesCalcGlobalSalary(reportFileName,maxSal,minSal,sumSal,employeeCounter)
 	;			
