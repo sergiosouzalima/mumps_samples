@@ -19,6 +19,7 @@ set(id,data)
 	IF id="" QUIT FALSE
 	SET employeeName=$piece(data,SEP,1)
 	SET employeeLastName=$piece(data,SEP,2)
+	SET:employeeLastName="" employeeLastName="NO-LAST-NAME"
 	SET salaryValue=$piece(data,SEP,3)
 	SET deptId=$piece(data,SEP,4)
 	SET ^employees(id)=employeeName_SEP_employeeLastName_SEP_salaryValue_SEP_deptId

@@ -18,11 +18,12 @@ Initialize
 	WRITE #,!,"*** Employees' Statistics Report ***",!!
 	SET TRUE=1,FALSE=0
 	SET SEP="^"
-	SET jsonFileName="assets/funcionarios.json" ;""assets/funcionarios-5M.json" ;funcionarios-5M.json" ;"funcionarios-10K.json" ;"funcionarios-30M.json" ; "funcionarios.json" ;
+	SET jsonFileName="assets/funcionarios-10K.json" ;"assets/funcionarios-5M.json"  ;"assets/funcionarios.json" ;funcionarios-5M.json" ;"funcionarios-30M.json" ; "funcionarios.json" ;
 	SET reportFileName="employeesReport.txt"
 	SET maxStringSize=1024*1024 ; the maximum GT.M string size
 	SET employeeId=0,departmentId=0,debugId=0
 	KILL ^employees,^departments,^debug
+	ZSYSTEM "rm "_reportFileName_" 2> /dev/null"
 	QUIT
 	;
 Finalize

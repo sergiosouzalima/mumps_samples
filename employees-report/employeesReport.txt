@@ -1,21 +1,57 @@
-global_max|Bernardo Costa|3.700,00
-global_min|Sergio Pinheiro|2.450,00
-global_min|Letícia Farias|2.450,00
-global_min|Fernando Ramos|2.450,00
-global_avg|2.731,82
-area_min|Desenvolvimento de Software|Sergio Pinheiro|2.450,00
-area_max|Desenvolvimento de Software|Cleverton Farias|2.750,00
-area_min|Desenvolvimento de Software|Fernando Ramos|2.450,00
-area_max|Desenvolvimento de Software|Fabio Souza|2.750,00
-area_avg|Desenvolvimento de Software|2.575,00
-area_min|Gerenciamento de Software|Marcelo Silva|3.200,00
-area_max|Gerenciamento de Software|Bernardo Costa|3.700,00
-area_avg|Gerenciamento de Software|3.450,00
-area_max|Designer de UI/UX|Washington Ramos|2.700,00
-area_min|Designer de UI/UX|Letícia Farias|2.450,00
-area_avg|Designer de UI/UX|2.566,67
-most_employees|Desenvolvimento de Software|6
-least_employees|Gerenciamento de Software|2
+global_max|Aahron Galvan|99.993,96
+global_min|Aakash Brino|1,96
+global_avg|49.648,19
+area_min|Área 1|Aahron Abate|64.106,68
+area_max|Área 1|Aahron Abato|89.912,17
+area_min|Área 1|Aahron Abaurre|7.616,62
+area_max|Área 1|Aahron Abella|98.234,52
+area_max|Área 1|Aahron Acord|99.613,87
+area_min|Área 1|Aahron Addonizio|2.616,72
+area_min|Área 1|Aahron Affinito|1.419,30
+area_min|Área 1|Aahron Agosto|157,26
+area_max|Área 1|Aahron Angelo|99.883,78
+area_min|Área 1|Aahron Blasier|42,40
+area_min|Área 1|Aahron Cornacchia|22,88
+area_max|Área 1|Aahron Galvan|99.993,96
+area_min|Área 1|Aakash Brino|1,96
+area_avg|Área 1|49.731,80
+area_min|Área 2|Aahron Abaine|24.048,75
+area_max|Área 2|Aahron Abreu|42.742,86
+area_max|Área 2|Aahron Adorno|97.558,81
+area_min|Área 2|Aahron Alba|21.808,00
+area_min|Área 2|Aahron Alessi|5.187,09
+area_max|Área 2|Aahron Baiense|98.679,84
+area_min|Área 2|Aahron Bara|2.952,95
+area_min|Área 2|Aahron Betit|1.096,73
+area_max|Área 2|Aahron Boisclair|99.433,88
+area_min|Área 2|Aahron Strabelli|243,89
+area_min|Área 2|Aakash Agosti|137,82
+area_max|Área 2|Aakash Bracci|99.884,08
+area_avg|Área 2|48.646,04
+most_employees|Área 1|9230
+least_employees|Área 3|0
+least_employees|Controladoria Central|0
+least_employees|Departamento 1|0
+least_employees|Departamento 2|0
+least_employees|Departamento 3|0
+least_employees|Departamento Comercial|0
+least_employees|Departamento Jurídico|0
+least_employees|Desenvolvimento de Software|0
+least_employees|Engenharia Social|0
+least_employees|Gestão de Ativos|0
+least_employees|Gerenciamento de Software|0
+least_employees|Governança de TI|0
+least_employees|Manutenção Elétrica|0
+least_employees|Manutenção Hidráulica|0
+least_employees|Manutenção Mecânica|0
+least_employees|Manutenção Predial|0
+least_employees|Pagadoria Externa|0
+least_employees|Pagadoria Interna|0
+least_employees|Produção Multimídia|0
+least_employees|Produção de Panfletos|0
+least_employees|Programação Visual|0
+least_employees|Recursos Humanos|0
+least_employees|Designer de UI/UX|0
 
 END RUN ****
 
