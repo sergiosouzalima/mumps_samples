@@ -20,6 +20,7 @@ main(reportFileName)
 	;
 	DO printLeastEmployee()
 	;
+	CLOSE fileName
 	QUIT	
 	;	
 generateMostLeastEmployee()

@@ -1,8 +1,8 @@
 	; Employees' Statistics Report. ;
 	;
-	; File mame: department.m
+	; File mame: departmentClass.m
 	; Author: Sergio Lima (Feb, 12 2022)
-	; How to run: mumps -r ^employees
+	; How to run: mumps -r ^employeesReport
 	;
 	; Made with GT.M Mumps for Linux. ;
 	;
@@ -40,6 +40,7 @@ get(id,data)
 	QUIT TRUE
 	;
 incEmployeeQty(id)
+	;
 	KILL data
 	IF id="" QUIT FALSE
 	QUIT:'$$get(id,.data) FALSE

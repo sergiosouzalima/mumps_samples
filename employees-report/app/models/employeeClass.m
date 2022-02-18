@@ -1,8 +1,8 @@
 	; Employees' Statistics Report. ;
 	;
-	; File mame: employee.m
+	; File mame: employeeClass.m
 	; Author: Sergio Lima (Feb, 12 2022)
-	; How to run: mumps -r ^employees
+	; How to run: mumps -r ^employeesReport
 	;
 	; Made with GT.M Mumps for Linux. ;
 	;
@@ -77,7 +77,7 @@ getEmployeeSalaryValue(id)
 getEmployeeDeptName(id)
 	;
 	SET deptId=$$getEmployeeDeptId(id)
-	QUIT $$getDeptName^department(deptId)
+	QUIT $$getDeptName^departmentClass(deptId)
 	;
 delete(id)
 	IF id="" QUIT FALSE

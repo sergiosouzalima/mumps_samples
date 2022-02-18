@@ -18,10 +18,9 @@ Initialize
 	WRITE #,!,"*** Employees' Statistics Report ***",!!
 	SET TRUE=1,FALSE=0
 	SET SEP="^"
-	SET jsonFileName="assets/funcionarios.json" ;"assets/funcionarios-5M.json" ;"assets/funcionarios-10K.json" ;"funcionarios-30M.json"
+	SET jsonFileName="assets/funcionarios-10K.json" ;"assets/funcionarios.json" ;"assets/funcionarios-5M.json" ;"funcionarios-30M.json"
 	SET reportFileName="employeesReport.txt"
 	SET maxStringSize=1024*1024 ; the maximum GT.M string size
-	;SET employeeId=0,departmentId=0,debugId=0
 	KILL ^employees,^departments,^debug
 	ZSYSTEM "rm "_reportFileName_" 2> /dev/null"
 	QUIT
@@ -83,11 +82,11 @@ saveObj(obj)
 	;	
 	IF objName="employee"  DO
 	. SET content=$$extractEmployeeFields^helper(obj)
-	. SET ok=$$create^employee(id,content)
+	. SET ok=$$create^employeeClass(id,content)
 	;	
 	IF objName="department"  DO
 	. SET content=$$extractDeptName^helper(obj)
-	. SET ok=$$create^department(id,content)
+	. SET ok=$$create^departmentClass(id,content)
 	;	
 	QUIT
 	;	

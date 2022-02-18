@@ -8,13 +8,13 @@
 	;		
 main(reportFileName,maxSal,minSal,sumSal,employeeCounter)
 	;
-	; ^Salary(salaryValue,generalId)=employeeId
+	; ^salary(salaryValue,generalId)=employeeId
 	;	
-	; ^Salary("2450.00",3)="2"
-	; ^Salary("2450.00",7)="6"
+	; ^salary("2450.00",3)="2"
+	; ^salary("2450.00",7)="6"
 	; ... ;
-	; ^Salary("3200.00",1)="0"
-	; ^Salary("3700.00",4)="3"
+	; ^salary("3200.00",1)="0"
+	; ^salary("3700.00",4)="3"
 	;	
 	SET fileName=reportFileName
 	OPEN fileName:(newversion:stream:nowrap:chset="M")
@@ -22,14 +22,14 @@ main(reportFileName,maxSal,minSal,sumSal,employeeCounter)
 	;	
 	; Get max salary
 	SET generalId=""
-	FOR i=1:1 SET generalId=$O(^Salary(maxSal,generalId)) Q:generalId=""  DO
-	. SET employeeId=^Salary(maxSal,generalId)
+	FOR i=1:1 SET generalId=$O(^salary(maxSal,generalId)) Q:generalId=""  DO
+	. SET employeeId=^salary(maxSal,generalId)
 	. DO writeGlobalMaxToFile(employeeId)
 	;	
 	; Get min salary
 	SET generalId=""
-	FOR i=1:1 SET generalId=$O(^Salary(minSal,generalId)) Q:generalId=""  DO
-	. SET employeeId=^Salary(minSal,generalId)
+	FOR i=1:1 SET generalId=$O(^salary(minSal,generalId)) Q:generalId=""  DO
+	. SET employeeId=^salary(minSal,generalId)
 	. DO writeGlobalMinToFile(employeeId)
 	;
 	; Get avg salary

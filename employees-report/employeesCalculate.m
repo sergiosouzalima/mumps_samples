@@ -15,23 +15,23 @@ main(reportFileName)
 	SET sumSal=0
 	SET employeeCounter=0
 	;	
-	KILL ^Salary,^SalaryDept,^SalaryLastName,^LastNameMax
+	KILL ^salary,^salaryDept,^salaryLastName,^lastNameMax
 	;	
 	FOR i=1:1 SET employeeId=$O(^employees(employeeId)) Q:employeeId=""  DO
 	. ; Clean employees data
 	. SET employeeData=$$removeBraces^helper(^employees(employeeId))
 	. SET ok=$$update^employee(employeeId,employeeData)
 	. ;
-	. SET deptId=$$getEmployeeDeptId^employee(employeeId)
-	. SET employeeLastName=$$getEmployeeLastName^employee(employeeId)	
+	. SET deptId=$$getEmployeeDeptId^employeeClass(employeeId)
+	. SET employeeLastName=$$getEmployeeLastName^employeeClass(employeeId)	
 	. SET salaryValue=$$getEmployeeSalaryValue^employee(employeeId)
 	. ; Add employee+1 to Department
-	. SET ok=$$incEmployeeQty^department(deptId)
+	. SET ok=$$incEmployeeQty^departmentClass(deptId)
 	. ; Set main work globals
 	. SET generalId=$Increment(generalId)
-	. SET ^SalaryDept(deptId,employeeId,salaryValue)=""
-	. SET ^Salary(salaryValue,generalId)=employeeId
-	. SET ^SalaryLastName(employeeLastName,generalId,salaryValue)=employeeId_"^"_employeeData
+	. SET ^salaryDept(deptId,employeeId,salaryValue)=""
+	. SET ^salary(salaryValue,generalId)=employeeId
+	. SET ^salaryLastName(employeeLastName,generalId,salaryValue)=employeeId_"^"_employeeData
 	. ; Calculate global max & min salary 
 	. SET maxSal=$$getMaxValue^helper(salaryValue,maxSal)
 	. SET minSal=$$getMinValue^helper(salaryValue,minSal)
@@ -39,7 +39,7 @@ main(reportFileName)
 	. SET employeeCounter=$Increment(employeeCounter)
 	. SET sumSal=sumSal+salaryValue
 	. ; Calculate max salary by employee last name
-	. SET ok=$$set^employeeLastNameMax(employeeLastName,salaryValue)
+	. SET ok=$$set^employeeLastNameMaxClass(employeeLastName,salaryValue)
 	;	
 	DO main^employeesCalcGlobalSalary(reportFileName,maxSal,minSal,sumSal,employeeCounter)
 	;			
@@ -47,5 +47,7 @@ main(reportFileName)
 	;	
 	DO main^employeesCalcMostLeastEmployee(reportFileName)
 	;	
+	DO main^employeesCalcLastNameMax(reportFileName)
+	;
 	QUIT
 	;	
