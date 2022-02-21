@@ -64,7 +64,7 @@ create(id,content)
 	; ^employees(1)="Washington^Ramos^2700.00^SD"
 	;
 	SET operationName="Create"
-	SET ok=$$create^employee(id,content)
+	SET ok=$$create^employeeClass(id,content)
 	DO showResult(operationName,ok,id,^employees(id))
 	;
 	QUIT
@@ -72,7 +72,7 @@ create(id,content)
 get(id)
 	;
 	SET operationName="get"
-	SET ok=$$get^employee(id,.data)
+	SET ok=$$get^employeeClass(id,.data)
 	DO showResult(operationName,ok,id,^employees(id))
 	;
 	QUIT
@@ -80,7 +80,7 @@ get(id)
 update(id,content) 
 	;
 	SET operationName="Update"
-	SET ok=$$update^employee(id,content)
+	SET ok=$$update^employeeClass(id,content)
 	DO showResult(operationName,ok,id,^employees(id))
 	;	
 	QUIT
@@ -88,7 +88,7 @@ update(id,content)
 delete(id)
 	;
 	SET operationName="Delete"
-	SET ok=$$delete^employee(id)
+	SET ok=$$delete^employeeClass(id)
 	DO showResult(operationName,ok,id,"")
 	;	
 	QUIT
@@ -96,7 +96,7 @@ delete(id)
 getProp(id,propertyName)
 	;
 	SET operationName="get by Property"
-	SET content=$$getProp^employee(id,propertyName)
+	SET content=$$getProp^employeeClass(id,propertyName)
 	SET ok=("Williams"=content)
 	DO showResult(operationName,ok,id,content)
 	;	
@@ -105,7 +105,7 @@ getProp(id,propertyName)
 getEmployeeFirstName(id)
 	;
 	SET operationName="get by First Name Property"
-	SET content=$$getEmployeeFirstName^employee(id)
+	SET content=$$getEmployeeFirstName^employeeClass(id)
 	SET ok=("Williams"=content)
 	DO showResult(operationName,ok,id,content)
 	;	
@@ -114,7 +114,7 @@ getEmployeeFirstName(id)
 getEmployeeLastName(id)
 	;
 	SET operationName="get by Last Name Property"
-	SET content=$$getEmployeeLastName^employee(id)
+	SET content=$$getEmployeeLastName^employeeClass(id)
 	SET ok=("Akron"=content)
 	DO showResult(operationName,ok,id,content)
 	;	
@@ -123,7 +123,7 @@ getEmployeeLastName(id)
 getEmployeeDeptId(id)
 	;
 	SET operationName="get by DeptId Property"
-	SET content=$$getEmployeeDeptId^employee(id)
+	SET content=$$getEmployeeDeptId^employeeClass(id)
 	SET ok=("SD"=content)
 	DO showResult(operationName,ok,id,content)
 	;	
@@ -135,7 +135,7 @@ getEmployeeDeptName(id)
 	;	
 	SET ok=$$create^department("SD","Software Development")
 	;	
-	SET content=$$getEmployeeDeptName^employee(id)
+	SET content=$$getEmployeeDeptName^employeeClass(id)
 	SET ok=("Software Development"=content)
 	DO showResult(operationName,ok,id,content)
 	;	
@@ -144,7 +144,7 @@ getEmployeeDeptName(id)
 getEmployeeSalaryValue(id)
 	;
 	SET operationName="get by Employee Salary Value Property"
-	SET content=$$getEmployeeSalaryValue^employee(id)
+	SET content=$$getEmployeeSalaryValue^employeeClass(id)
 	SET ok=("2700.00"=content)
 	DO showResult(operationName,ok,id,content)
 	;	

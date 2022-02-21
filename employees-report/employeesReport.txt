@@ -1,12 +1,12 @@
-global_max|Aahron Galvan|99.993,96
-global_min|Aakash Brino|1,96
-global_avg|49.648,19
-area_max|Área 1|Aahron Galvan|99.993,96
-area_min|Área 1|Aakash Brino|1,96
-area_avg|Área 1|49.731,80
-area_min|Área 2|Aakash Agosti|137,82
-area_max|Área 2|Aakash Bracci|99.884,08
-area_avg|Área 2|48.646,04
+global_max|Aahron Galvan|99993.96
+global_min|Aakash Brino|1.96
+global_avg|49648.19
+area_max|Área 1|Aahron Galvan|99993.96
+area_min|Área 1|Aakash Brino|1.96
+area_avg|Área 1|49731.80
+area_min|Área 2|Aakash Agosti|137.82
+area_max|Área 2|Aakash Bracci|99884.08
+area_avg|Área 2|48646.04
 most_employees|Área 1|9230
 least_employees|Área 3|0
 least_employees|Controladoria Central|0
@@ -514,7 +514,7 @@ last_name_max|Bianco|Aahron Bianco|52912.75
 last_name_max|Bianconi|Aahron Bianconi|34013.24
 last_name_max|Bibeault|Aahron Bibeault|88378.24
 last_name_max|Bickert|Aahron Bickert|83835.02
-last_name_max|Bien-Aime|Aahron Bien-Aime|79038.82
+last_name_max|BienAime|Aahron BienAime|79038.82
 last_name_max|Bienvenue|Aahron Bienvenue|32814.99
 last_name_max|Bila|Aahron Bila|39021.11
 last_name_max|Billet|Aahron Billet|75639.84
@@ -1592,7 +1592,7 @@ last_name_max|Gould|Aahron Gould|31217.63
 last_name_max|Grado|Aahron Grado|85148.51
 last_name_max|Graf|Aahron Graf|70425.73
 last_name_max|Graham|Aahron Graham|70842.57
-last_name_max|Grand-Pre|Aahron Grand-Pre|97105.37
+last_name_max|GrandPre|Aahron GrandPre|97105.37
 last_name_max|Grant|Aahron Grant|72305.59
 last_name_max|Granzottin|Aahron Granzottin|31710.52
 last_name_max|Granzotto|Aahron Granzotto|93896.94
@@ -2803,7 +2803,7 @@ last_name_max|Bellanca|Aakash Bellanca|74922.30
 last_name_max|Belland|Aakash Belland|71053.45
 last_name_max|Bellanti|Aakash Bellanti|96026.37
 last_name_max|Bellard|Aakash Bellard|64881.84
-last_name_max|Belle-Isle|Aakash Belle-Isle|94031.10
+last_name_max|BelleIsle|Aakash BelleIsle|94031.10
 last_name_max|Bellefeuille|Aakash Bellefeuille|34571.50
 last_name_max|Bellefleur|Aakash Bellefleur|98984.30
 last_name_max|Bellerive|Aakash Bellerive|75169.84
@@ -4892,7 +4892,7 @@ last_name_max|Zucatelli|Aakash Zucatelli|82158.10
 last_name_max|Zuchi|Aakash Zuchi|80823.26
 last_name_max|Zuniga|Aakash Zuniga|61495.54
 last_name_max|Zuqui|Aakash Zuqui|88124.27
-last_name_max|NO-LAST-NAME|Aakash NO-LAST-NAME|45715.03
+last_name_max||Aakash |45715.03
 last_name_max|Abbud|Aalam Abbud|88787.85
 last_name_max|Abecassis|Aalam Abecassis|92644.95
 last_name_max|Abramo|Aalam Abramo|83579.84

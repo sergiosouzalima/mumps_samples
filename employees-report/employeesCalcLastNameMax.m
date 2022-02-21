@@ -34,20 +34,20 @@ generateLastNameMax()
 	;
 	SET employeeId=""
 	FOR i=1:1 SET employeeId=$O(^employees(employeeId)) Q:employeeId=""  DO
-	. SET employeeLastName=$$getEmployeeLastName^employee(employeeId)
+	. SET employeeLastName=$$getEmployeeLastName^employeeClass(employeeId)
 	. IF $D(^lastNameMax(employeeLastName)) DO
 	. . IF ($$getEmployeeQty^employeeLastNameMaxClass(employeeLastName)>1) DO
 	. . . SET employeeLastNameMaxSalaryValue=$$getSalaryValue^employeeLastNameMaxClass(employeeLastName)
-	. . . SET employeeSalaryValue=$$getEmployeeSalaryValue^employee(employeeId)
+	. . . SET employeeSalaryValue=$$getEmployeeSalaryValue^employeeClass(employeeId)
 	. . . IF employeeLastNameMaxSalaryValue=employeeSalaryValue DO
-	. . . . SET employeeSalaryValue=$$getEmployeeSalaryValue^employee(employeeId)
-	. . . . SET employeeFullName=$$getEmployeeFullName^employee(employeeId)
+	. . . . SET employeeSalaryValue=$$getEmployeeSalaryValue^employeeClass(employeeId)
+	. . . . SET employeeFullName=$$getEmployeeFullName^employeeClass(employeeId)
 	. . . . DO printLastNameMax(employeeLastName,employeeFullName,employeeSalaryValue)
 	;
 	QUIT	
 	;
 printLastNameMax(employeeLastName,employeeFullName,employeeSalaryValue)	
-	SET content=employeeLastName_"|"_employeeFullName_"|"_employeeSalaryValue	
+	SET content=$$formatIfNull^helper(employeeLastName)_"|"_$$formatIfNull^helper(employeeFullName)_"|"_$$formatDecimal^helper(employeeSalaryValue)	
 	;	
 	DO writeToFile("last_name_max",content)
 	;

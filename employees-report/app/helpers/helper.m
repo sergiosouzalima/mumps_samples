@@ -40,6 +40,15 @@ formatCurrency(value)
 	SET:value="" value=0
 	QUIT $translate($fnumber(value,",",2),".,",",.")
 	;	
+formatDecimal(value)
+	;
+	SET:value="" value=0
+	QUIT $fnumber(value,"",2)
+	;	
+formatIfNull(value)
+	;
+	QUIT $translate(value,"-1","")
+	;	
 saveDebug(msg)
 	;
 	SET debugId=debugId+1

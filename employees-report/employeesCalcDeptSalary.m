@@ -51,7 +51,7 @@ generateSalaryDeptAvg()
 	. . FOR k=1:1 SET salaryValue=$O(^salaryDept(deptId,employeeId,salaryValue)) Q:salaryValue=""  DO
 	. . . SET sumSal=sumSal+salaryValue
 	. . . SET employeeCounter=employeeCounter+1
-	. . . SET:employeeCounter>0 ^salaryDeptAvg(deptId)=$$formatCurrency^helper(sumSal/employeeCounter)
+	. . . SET:employeeCounter>0 ^salaryDeptAvg(deptId)=sumSal/employeeCounter
 	;	
 	QUIT	
 	;
@@ -155,7 +155,7 @@ writeSalaryMinMaxToFile(minMaxArea,deptId,employeeId,salaryValue)
 	QUIT	
 	;
 writeSalaryAvgToFile(deptId)
-	SET salaryValue=^salaryDeptAvg(deptId)
+	SET salaryValue=$$formatDecimal^helper(^salaryDeptAvg(deptId))
 	SET deptName=$$getDeptName^department(deptId)
 	SET content=deptName_"|"_salaryValue
 	DO writeToFile("area_avg",content)
@@ -164,8 +164,8 @@ writeSalaryAvgToFile(deptId)
 	;
 getContentToFile(deptId,employeeId,salaryValue)
 	SET deptName=$$getDeptName^department(deptId)
-	SET employeeFullName=$$getEmployeeFullName^employee(employeeId)
-	SET salaryValueFormat=$$formatCurrency^helper(salaryValue)
+	SET employeeFullName=$$getEmployeeFullName^employeeClass(employeeId)
+	SET salaryValueFormat=$$formatDecimal^helper(salaryValue)
 	;	
 	SET content=deptName_"|"_employeeFullName_"|"_salaryValueFormat
 	;	

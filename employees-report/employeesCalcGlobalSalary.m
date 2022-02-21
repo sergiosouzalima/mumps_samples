@@ -34,7 +34,7 @@ main(reportFileName,maxSal,minSal,sumSal,employeeCounter)
 	;
 	; Get avg salary
 	SET globalAvg=0
-	SET:employeeCounter>0 globalAvg=sumSal/employeeCounter
+	SET:employeeCounter>0 globalAvg=$$formatDecimal^helper(sumSal/employeeCounter)
 	DO writeGlobalAvgToFile(globalAvg)
 	;
 	CLOSE fileName
@@ -51,13 +51,14 @@ writeGlobalMinToFile(employeeId)
 	QUIT	
 	;
 writeGlobalAvgToFile(globalAvg)
-	DO writeToFile("global_avg",$$formatCurrency^helper(globalAvg))
+	DO writeToFile("global_avg",globalAvg)
+	;	
 	;	
 	QUIT	
 	;
 getContentToFile(employeeId)
-	SET employeeFullName=$$getEmployeeFullName^employee(employeeId)
-	SET salary=$$formatCurrency^helper($$getEmployeeSalaryValue^employee(employeeId))
+	SET employeeFullName=$$getEmployeeFullName^employeeClass(employeeId)
+	SET salary=$$formatDecimal^helper($$getEmployeeSalaryValue^employeeClass(employeeId))
 	SET content=employeeFullName_"|"_salary
 	;	
 	QUIT content

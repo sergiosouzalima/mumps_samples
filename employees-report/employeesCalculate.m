@@ -20,11 +20,11 @@ main(reportFileName)
 	FOR i=1:1 SET employeeId=$O(^employees(employeeId)) Q:employeeId=""  DO
 	. ; Clean employees data
 	. SET employeeData=$$removeBraces^helper(^employees(employeeId))
-	. SET ok=$$update^employee(employeeId,employeeData)
+	. SET ok=$$update^employeeClass(employeeId,employeeData)
 	. ;
 	. SET deptId=$$getEmployeeDeptId^employeeClass(employeeId)
 	. SET employeeLastName=$$getEmployeeLastName^employeeClass(employeeId)	
-	. SET salaryValue=$$getEmployeeSalaryValue^employee(employeeId)
+	. SET salaryValue=$$getEmployeeSalaryValue^employeeClass(employeeId)
 	. ; Add employee+1 to Department
 	. SET ok=$$incEmployeeQty^departmentClass(deptId)
 	. ; Set main work globals
