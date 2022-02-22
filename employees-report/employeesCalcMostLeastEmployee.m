@@ -37,9 +37,10 @@ generateMostLeastEmployee()
 	SET deptId=""
 	FOR i=1:1 SET deptId=$O(^departments(deptId)) Q:deptId=""  DO
 	. SET employeeQty=$$getEmployeeQty^department(deptId)
-	. ; Calculate max & min EmployeeQty by Department 
-	. SET maxEmployeeQty=$$getMaxValue^helper(employeeQty,maxEmployeeQty)
-	. SET minEmployeeQty=$$getMinValue^helper(employeeQty,minEmployeeQty)
+	. IF employeeQty>0 DO
+	. . ; Calculate max & min EmployeeQty by Department 
+	. . SET maxEmployeeQty=$$getMaxValue^helper(employeeQty,maxEmployeeQty)
+	. . SET minEmployeeQty=$$getMinValue^helper(employeeQty,minEmployeeQty)
 	;
 	; Read all Departments. Create list with departments with most and least employees
 	SET deptId=""

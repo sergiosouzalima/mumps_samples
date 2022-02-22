@@ -4923,27 +4923,5 @@ last_name_max|Zucoloto|Aahron Zucoloto|70490.44
 last_name_max|Zuniga|Aakash Zuniga|61495.54
 last_name_max|Zuqui|Aakash Zuqui|88124.27
 last_name_max|Zuza|Aahron Zuza|34012.40
-least_employees|Área 3|0
-least_employees|Controladoria Central|0
-least_employees|Departamento 1|0
-least_employees|Departamento 2|0
-least_employees|Departamento 3|0
-least_employees|Departamento Comercial|0
-least_employees|Departamento Jurídico|0
-least_employees|Desenvolvimento de Software|0
-least_employees|Designer de UI/UX|0
-least_employees|Engenharia Social|0
-least_employees|Gerenciamento de Software|0
-least_employees|Gestão de Ativos|0
-least_employees|Governança de TI|0
-least_employees|Manutenção Elétrica|0
-least_employees|Manutenção Hidráulica|0
-least_employees|Manutenção Mecânica|0
-least_employees|Manutenção Predial|0
-least_employees|Pagadoria Externa|0
-least_employees|Pagadoria Interna|0
-least_employees|Produção de Panfletos|0
-least_employees|Produção Multimídia|0
-least_employees|Programação Visual|0
-least_employees|Recursos Humanos|0
+least_employees|Área 2|770
 most_employees|Área 1|9230
