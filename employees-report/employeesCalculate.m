@@ -22,9 +22,10 @@ main(reportFileName)
 	. SET employeeData=$$removeBraces^helper(^employees(employeeId))
 	. SET ok=$$update^employeeClass(employeeId,employeeData)
 	. ;
-	. SET deptId=$$getEmployeeDeptId^employeeClass(employeeId)
-	. SET employeeLastName=$$getEmployeeLastName^employeeClass(employeeId)	
-	. SET salaryValue=$$getEmployeeSalaryValue^employeeClass(employeeId)
+	. ; ^employees(id)="employeeFirstName^employeeLastName^salaryValue^deptId"
+	. SET deptId=$$getEmployeeDeptId^employeeClass(employeeId,employeeData)
+	. SET employeeLastName=$$getEmployeeLastName^employeeClass(employeeId,employeeData)	
+	. SET salaryValue=$$getEmployeeSalaryValue^employeeClass(employeeId,employeeData)
 	. ; Add employee+1 to Department
 	. SET ok=$$incEmployeeQty^departmentClass(deptId)
 	. ; Set main work globals

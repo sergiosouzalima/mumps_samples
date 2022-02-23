@@ -30,40 +30,74 @@ update(id,data)
 	;
 	QUIT $$set(id,data)
 	;
-get(id,data)
-	NEW record
-	KILL data
-	IF id="" QUIT FALSE
-	SET record=$get(^departments(id))
-	SET data("deptName")=$piece(record,SEP,1)
-	SET data("employeeQty")=$piece(record,SEP,2)
-	QUIT TRUE
+getRecordPosition(propertyName)
+	KILL recordPos
+	SET recordPos("deptName")=1,recordPos("employeeQty")=2
+	;	
+	QUIT recordPos(propertyName)
+	;	
+getPropertyValue(dataRecord,propertyName)
+	;
+	QUIT $PIECE(dataRecord,SEP,$$getRecordPosition(propertyName))
+	;
+;get(id,data)
+	;NEW record
+	;KILL data
+	;IF id="" QUIT FALSE
+	;SET record=$get(^departments(id))
+	;SET data("deptName")=$piece(record,SEP,1)
+	;SET data("employeeQty")=$piece(record,SEP,2)
+	;QUIT TRUE
+	;
+get(id)
+	;
+	QUIT ^departments(id)
 	;
 incEmployeeQty(id)
 	;
 	KILL data
+	KILL dataRecord
 	IF id="" QUIT FALSE
-	QUIT:'$$get(id,.data) FALSE
+	;QUIT:'$$get(id,.data) FALSE
 	;	
-	SET deptName=data("deptName")
-	SET employeeQty=data("employeeQty")+1
+	;SET deptName=data("deptName")
+	;SET employeeQty=data("employeeQty")+1
+	SET dataRecord=$$get(id)
+	SET deptName=$$getDeptName(-1,dataRecord)
+	SET employeeQty=$$getEmployeeQty(-1,dataRecord)+1
 	SET data=deptName_SEP_employeeQty
 	SET ok=$$update(id,data)
 	QUIT ok
 	;
-getProp(id,propertyName)
-	IF id="" QUIT ""
-	SET ok=$$get(id,.data)
-	IF ok QUIT data(propertyName)
-	IF 'ok QUIT ""
+getDeptName(id,dataRecord)
+	;	
+	SET propertyName="deptName"
+	;	
+	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
+	;	
+	QUIT $$getPropertyValue(^employees(id),propertyName)
 	;
-getDeptName(id)
+;getProp(id,propertyName)
+	;IF id="" QUIT ""
+	;SET ok=$$get(id,.data)
+	;IF ok QUIT data(propertyName)
+	;IF 'ok QUIT ""
 	;
-	QUIT $$getProp(id,"deptName")
+;getDeptName(id)
 	;
-getEmployeeQty(id)
+	;QUIT $$getProp(id,"deptName")
 	;
-	QUIT $$getProp(id,"employeeQty")
+getEmployeeQty(id,dataRecord)
+	;	
+	SET propertyName="employeeQty"
+	;	
+	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
+	;	
+	QUIT $$getPropertyValue(^employees(id),propertyName)
+	;	
+;getEmployeeQty(id)
+	;
+	;QUIT $$getProp(id,"employeeQty")
 	;
 delete(id)
 	IF id="" QUIT FALSE

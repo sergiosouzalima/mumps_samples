@@ -33,46 +33,54 @@ update(id,data)
 	;
 	QUIT $$set(id,data)
 	;
-get(id,data)
-	NEW record
-	KILL data
-	IF id="" QUIT FALSE
-	SET record=$get(^employees(id))
-	SET data("employeeFirstName")=$piece(record,SEP,1)
-	SET data("employeeLastName")=$piece(record,SEP,2)
-	SET data("salaryValue")=$piece(record,SEP,3)
-	SET data("deptId")=$piece(record,SEP,4)
-	QUIT TRUE
+getRecordPosition(propertyName)
+	KILL recordPos
+	SET recordPos("employeeFirstName")=1,recordPos("employeeLastName")=2
+	SET recordPos("salaryValue")=3,recordPos("deptId")=4
+	;	
+	QUIT recordPos(propertyName)
+	;	
+getPropertyValue(dataRecord,propertyName)
 	;
-getProp(id,propertyName)
-	IF id="" QUIT ""
-	SET ok=$$get(id,.data)
-	IF ok QUIT data(propertyName)
-	IF 'ok QUIT ""
+	QUIT $PIECE(dataRecord,SEP,$$getRecordPosition(propertyName))
 	;
-getEmployeeName(id)
+getEmployeeFirstName(id,dataRecord)
 	;
-	QUIT $$getProp(id,"employeeName")
+	SET propertyName="employeeFirstName"
+	;	
+	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
+	;	
+	QUIT $$getPropertyValue(^employees(id),propertyName)
 	;
-getEmployeeFirstName(id)
+getEmployeeLastName(id,dataRecord)
 	;
-	QUIT $$getProp(id,"employeeFirstName")
+	SET propertyName="employeeLastName"
+	;	
+	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
+	;	
+	QUIT $$getPropertyValue(^employees(id),propertyName)
 	;
-getEmployeeLastName(id)
+getEmployeeFullName(id,dataRecord)
 	;
-	QUIT $$getProp(id,"employeeLastName")
+	QUIT:'$D(dataRecord) $$getEmployeeFirstName(id)_" "_$$getEmployeeLastName(id)
+	;	
+	QUIT $$getEmployeeFirstName(id,dataRecord)_" "_$$getEmployeeLastName(id,dataRecord)
 	;
-getEmployeeFullName(id)
+getEmployeeDeptId(id,dataRecord)
+	;	
+	SET propertyName="deptId"
+	;	
+	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
+	;	
+	QUIT $$getPropertyValue(^employees(id),propertyName)
 	;
-	QUIT $$getEmployeeFirstName(id)_" "_$$getEmployeeLastName(id)
-	;
-getEmployeeDeptId(id)
-	;
-	QUIT $$getProp(id,"deptId")
-	;
-getEmployeeSalaryValue(id)
-	;
-	QUIT $$getProp(id,"salaryValue")
+getEmployeeSalaryValue(id,dataRecord)
+	;	
+	SET propertyName="salaryValue"
+	;	
+	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
+	;	
+	QUIT $$getPropertyValue(^employees(id),propertyName)
 	;
 getEmployeeDeptName(id)
 	;
