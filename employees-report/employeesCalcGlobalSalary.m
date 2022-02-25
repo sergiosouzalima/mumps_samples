@@ -53,7 +53,6 @@ writeGlobalMinToFile(employeeId)
 writeGlobalAvgToFile(globalAvg)
 	DO writeToFile("global_avg",globalAvg)
 	;	
-	;	
 	QUIT	
 	;
 getContentToFile(employeeId)

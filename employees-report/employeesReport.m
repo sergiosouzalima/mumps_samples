@@ -18,7 +18,7 @@ Initialize
 	WRITE #,!,"*** Employees' Statistics Report ***",!!
 	SET TRUE=1,FALSE=0
 	SET SEP="^"
-	SET jsonFileName="assets/funcionarios-10K.json";"assets/funcionarios-5M.json";"assets/funcionarios.json";"funcionarios-30M.json"
+	SET jsonFileName="assets/funcionarios-5M.json";"assets/funcionarios-10K.json";"assets/funcionarios.json";"funcionarios-30M.json"
 	SET reportFileName="employeesReport.txt"
 	SET maxStringSize=1024*1024 ; the maximum GT.M string size
 	KILL ^employees,^departments,^debug

@@ -15,7 +15,7 @@ main(reportFileName)
 	SET sumSal=0
 	SET employeeCounter=0
 	;	
-	KILL ^salary,^salaryDept,^salaryLastName,^lastNameMax
+	KILL ^salary,^salaryDept,^lastNameMax
 	;	
 	FOR i=1:1 SET employeeId=$O(^employees(employeeId)) Q:employeeId=""  DO
 	. ; Clean employees data
@@ -31,8 +31,7 @@ main(reportFileName)
 	. ; Set main work globals
 	. SET generalId=$Increment(generalId)
 	. SET ^salaryDept(deptId,employeeId,salaryValue)=""
-	. SET ^salary(salaryValue,generalId)=employeeId
-	. SET ^salaryLastName(employeeLastName,generalId,salaryValue)=employeeId_"^"_employeeData
+	. SET ^salary(salaryValue,generalId)=employeeId;_"^"_employeeData
 	. ; Calculate global max & min salary 
 	. SET maxSal=$$getMaxValue^helper(salaryValue,maxSal)
 	. SET minSal=$$getMinValue^helper(salaryValue,minSal)

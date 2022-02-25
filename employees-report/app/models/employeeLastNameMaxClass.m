@@ -6,10 +6,10 @@
 	;
 	; Made with GT.M Mumps for Linux. ;
 	;
-	; ^lastNameMax	(employeeLastName)=employeeFullName^salaryValue
-	;
-	; ^lastNameMax("Ramos")="Washington Ramos^2700.00"
-	; ^lastNameMax("Farias")="Cleverton Farias^2750.00"
+	; lastNameMax(employeeLastName)=salaryValue^employeeQty
+	;	
+	; ^lastNameMax("Watanabe")="33376.08^2"
+	; ^lastNameMax("Waters")="84516.18^2"
 	;
 	SET SEP="^"
 	SET TRUE=1,FALSE=0
@@ -21,52 +21,58 @@ set(employeeLastName,employeeSalaryValue)
 	;	
 	QUIT:'exists $$create(employeeLastName,employeeSalaryValue)
 	;	
-	SET lastNameMaxSalaryValue=$$getSalaryValue(employeeLastName)
+	SET dataRecord=^lastNameMax(employeeLastName)
 	;	
-	SET foundHigherSalary=(employeeSalaryValue'<lastNameMaxSalaryValue)
+	SET lastNameMaxSalaryValue=$$getSalaryValue(employeeLastName,dataRecord)
 	;	
-	SET:foundHigherSalary ok=$$update(employeeLastName,employeeSalaryValue)
-	SET:'foundHigherSalary ok=$$update(employeeLastName,lastNameMaxSalaryValue)
+	SET employeeQty=$$getEmployeeQty(employeeLastName,dataRecord)
+	;	
+	SET higherSalaryFound=(employeeSalaryValue'<lastNameMaxSalaryValue)
+	;	
+	SET:higherSalaryFound ok=$$update(employeeLastName,employeeSalaryValue,employeeQty)
+	SET:'higherSalaryFound ok=$$update(employeeLastName,lastNameMaxSalaryValue,employeeQty)
 	;	
 	QUIT ok
 	;
 create(employeeLastName,salaryValue)
-	SET salaryValue=salaryValue
+	;	
 	SET employeeQty=1
+	;	
 	SET ^lastNameMax(employeeLastName)=salaryValue_SEP_employeeQty
 	;
 	QUIT TRUE
 	;
-update(employeeLastName,salaryValue)
-	QUIT:'$$get(employeeLastName,.data) FALSE
+update(employeeLastName,salaryValue,employeeQty)
 	;
-	SET employeeQty=data("employeeQty")+1
+	SET employeeQty=employeeQty+1
 	;
 	SET ^lastNameMax(employeeLastName)=salaryValue_SEP_employeeQty
 	;	
 	QUIT TRUE
 	;
-get(employeeLastName,data)
-	NEW record
-	KILL data
-	IF employeeLastName="" QUIT FALSE
-	SET record=$get(^lastNameMax(employeeLastName))
-	SET data("salaryValue")=$piece(record,SEP,1)
-	SET data("employeeQty")=$piece(record,SEP,2)
+getRecordPosition(propertyName)
+	KILL recordPos
+	SET recordPos("salaryValue")=1,recordPos("employeeQty")=2 
 	;	
-	QUIT TRUE
+	QUIT recordPos(propertyName)
+	;	
+getPropertyValue(dataRecord,propertyName)
 	;
-getProp(employeeLastName,propertyName)
-	IF employeeLastName="" QUIT ""
-	SET ok=$$get(employeeLastName,.data)
-	IF ok QUIT data(propertyName)
-	IF 'ok QUIT ""
+	QUIT $PIECE(dataRecord,SEP,$$getRecordPosition(propertyName))
 	;
-getSalaryValue(employeeLastName)
+getSalaryValue(id,dataRecord)
+	;	
+	SET propertyName="salaryValue"
+	;	
+	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
+	;	
+	QUIT $$getPropertyValue(^lastNameMax(id),propertyName)
 	;
-	QUIT $$getProp(employeeLastName,"salaryValue")
-	;
-getEmployeeQty(employeeLastName)
-	;
-	QUIT $$getProp(employeeLastName,"employeeQty")
+getEmployeeQty(id,dataRecord)
+	;	
+	SET propertyName="employeeQty"
+	;	
+	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
+	;	
+	QUIT $$getPropertyValue(^lastNameMax(id),propertyName)
 	;
