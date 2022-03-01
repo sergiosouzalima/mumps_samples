@@ -25,8 +25,6 @@ main()
 	;
 setup()
 	;
-	SET SEP="^"
-	SET TRUE=1,FALSE=0
 	SET CLASSNAME="Department"
 	SET testCounter=0
 	KILL ^departments

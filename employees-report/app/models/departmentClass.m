@@ -11,9 +11,6 @@
 	; ^departments("SD")="Software Development^1"
 	; ^departments("SM")="Software Management^22"
 	;
-	SET SEP="^"
-	SET TRUE=1,FALSE=0
-	;
 set(id,data)
 	IF id="" QUIT FALSE
 	SET deptName=$piece(data,SEP,1)

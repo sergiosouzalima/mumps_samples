@@ -11,10 +11,6 @@
 	; ^employees(1)="Washington^Ramos^2700.00^SD"
 	; ^employees(2)="Wilson^Silva^3200.00^SM"
 	;	
-	;		
-	SET SEP="^"
-	SET TRUE=1,FALSE=0
-	;	
 set(id,data)
 	IF id="" QUIT FALSE
 	SET employeeName=$piece(data,SEP,1)

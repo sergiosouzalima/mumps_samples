@@ -7,6 +7,17 @@
 	;
 	; Made with GT.M Mumps for Linux. ;
 	;
+loadConstants
+	;
+	SET TRUE=1,FALSE=0
+	SET SEP="^"
+	SET programTitle="*** Employees' Statistics Report ***"
+	SET jsonFileName="assets/funcionarios-10K.json"; "assets/funcionarios-5M.json"; "assets/funcionarios.json";"funcionarios-30M.json"
+	SET reportFileName="employeesReport.txt"
+	SET maxStringSize=1024*1024 ; the maximum GT.M string size
+	;	
+	QUIT
+	;	
 getMaxValue(value,maxValue)
 	;	
 	SET:value>maxValue maxValue=value

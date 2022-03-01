@@ -31,8 +31,6 @@ main()
 	;
 setup()
 	;
-	SET SEP="^"
-	SET TRUE=1,FALSE=0
 	SET CLASSNAME="Employee"
 	SET testCounter=0
 	KILL ^employees

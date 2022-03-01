@@ -11,9 +11,6 @@
 	; ^lastNameMax("Watanabe")="33376.08^2"
 	; ^lastNameMax("Waters")="84516.18^2"
 	;
-	SET SEP="^"
-	SET TRUE=1,FALSE=0
-	;
 set(employeeLastName,employeeSalaryValue)
 	QUIT:employeeLastName="" FALSE
 	;	
