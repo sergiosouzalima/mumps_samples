@@ -32,8 +32,6 @@ jsonToFile
 	;	
 	OPEN jsonFileName:(readonly:recordsize=maxStringSize)
 	;	
-	SET employeeId=0
-	SET departmentId=0
 	SET previousLine=""
 	;	
 	FOR i=1:1 QUIT:$zeof  SET previousLine=$$processLine(jsonFileName,previousLine)
