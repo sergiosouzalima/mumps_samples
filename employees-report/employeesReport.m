@@ -32,9 +32,12 @@ importJsonFile
 	;	
 	OPEN $$JSONFILENAME^constantClass:(readonly:recordsize=$$MAXSTRINGSIZE^constantClass)
 	;	
+	USE $$JSONFILENAME^constantClass 
+	;	
 	SET previousLine=""
 	;	
-	FOR i=1:1 QUIT:$zeof  SET previousLine=$$processLine($$JSONFILENAME^constantClass,previousLine)
+	FOR  QUIT:$zeof  DO
+	. SET previousLine=$$processLine(previousLine)
 	;	
 	USE $principal
 	;	
@@ -42,17 +45,13 @@ importJsonFile
 	;	
 	QUIT
 	;	
-processLine(jsonFile,previousLine)
-	;	
-	USE jsonFile 
-	READ line
-	SET currentLine=previousLine_line
+processLine(previousLine)
 	;	 
-	SET currentLine=$$cleanLine(currentLine)
-	;		
-	SET previousLine=$$processObj(currentLine)
+	READ line
 	;	
-	QUIT previousLine
+	SET currentLine=previousLine_$$cleanLine(line)
+	;	 
+	QUIT $$processObj(currentLine)
 	;
 processObj(line)
 	;	
