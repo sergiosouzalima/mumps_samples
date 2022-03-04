@@ -8,6 +8,8 @@
 	;		
 main(reportFileName)
 	;
+	DO saveDebug^helper("main^employeesCalcMostLeastEmployee 000000000")
+	;	
 	KILL ^mostLeastEmployee
 	;	
 	DO generateMostLeastEmployee()
@@ -21,6 +23,9 @@ main(reportFileName)
 	DO printLeastEmployee()
 	;
 	CLOSE fileName
+	;	
+	DO saveDebug^helper("main^employeesCalcMostLeastEmployee 999999999")
+	;	
 	QUIT	
 	;	
 generateMostLeastEmployee()
@@ -36,7 +41,7 @@ generateMostLeastEmployee()
 	SET minEmployeeQty=999999
 	SET deptId=""
 	FOR i=1:1 SET deptId=$O(^departments(deptId)) Q:deptId=""  DO
-	. SET employeeQty=$$getEmployeeQty^department(deptId)
+	. SET employeeQty=$$getEmployeeQty^departmentClass(deptId)
 	. IF employeeQty>0 DO
 	. . ; Calculate max & min EmployeeQty by Department 
 	. . SET maxEmployeeQty=$$getMaxValue^helper(employeeQty,maxEmployeeQty)
@@ -45,7 +50,7 @@ generateMostLeastEmployee()
 	; Read all Departments. Create list with departments with most and least employees
 	SET deptId=""
 	FOR i=1:1 SET deptId=$O(^departments(deptId)) Q:deptId=""  DO
-	. SET employeeQty=$$getEmployeeQty^department(deptId)
+	. SET employeeQty=$$getEmployeeQty^departmentClass(deptId)
 	. SET:employeeQty=maxEmployeeQty ^mostLeastEmployee("most_employees",deptId)=maxEmployeeQty
 	. SET:employeeQty=minEmployeeQty ^mostLeastEmployee("least_employees",deptId)=minEmployeeQty
 	;
@@ -85,7 +90,7 @@ writeMaxMinEmployeeToFile(maxMinEmployee,deptId,maxMinEmployeeQty)
 	QUIT	
 	;
 getContentToFile(deptId,maxMinEmployeeQty)
-	SET deptName=$$getDeptName^department(deptId)
+	SET deptName=$$getDeptName^departmentClass(deptId)
 	;	
 	SET content=deptName_"|"_maxMinEmployeeQty
 	;	

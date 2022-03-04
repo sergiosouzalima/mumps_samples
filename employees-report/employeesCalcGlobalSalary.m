@@ -16,6 +16,8 @@ main(reportFileName,maxSal,minSal,sumSal,employeeCounter)
 	; ^salary("3200.00",1)="0"
 	; ^salary("3700.00",4)="3"
 	;	
+	DO saveDebug^helper("main^employeesCalcGlobalSalary 000000000")
+	;	
 	SET fileName=reportFileName
 	OPEN fileName:(newversion:stream:nowrap:chset="M")
 	USE fileName
@@ -38,6 +40,9 @@ main(reportFileName,maxSal,minSal,sumSal,employeeCounter)
 	DO writeGlobalAvgToFile(globalAvg)
 	;
 	CLOSE fileName
+	;	
+	DO saveDebug^helper("main^employeesCalcGlobalSalary 999999999")
+	;	
 	QUIT	
 	;	
 writeGlobalMaxToFile(employeeId)

@@ -12,7 +12,7 @@
 	; ^lastNameMax("Waters")="84516.18^2"
 	;
 set(employeeLastName,employeeSalaryValue)
-	QUIT:employeeLastName="" FALSE
+	QUIT:employeeLastName="" $$FALSE^constantClass
 	;	
 	SET exists=$D(^lastNameMax(employeeLastName))
 	;	
@@ -35,17 +35,17 @@ create(employeeLastName,salaryValue)
 	;	
 	SET employeeQty=1
 	;	
-	SET ^lastNameMax(employeeLastName)=salaryValue_SEP_employeeQty
+	SET ^lastNameMax(employeeLastName)=salaryValue_$$SEP^constantClass_employeeQty
 	;
-	QUIT TRUE
+	QUIT $$TRUE^constantClass
 	;
 update(employeeLastName,salaryValue,employeeQty)
 	;
 	SET employeeQty=employeeQty+1
 	;
-	SET ^lastNameMax(employeeLastName)=salaryValue_SEP_employeeQty
+	SET ^lastNameMax(employeeLastName)=salaryValue_$$SEP^constantClass_employeeQty
 	;	
-	QUIT TRUE
+	QUIT $$TRUE^constantClass
 	;
 getRecordPosition(propertyName)
 	KILL recordPos
@@ -55,7 +55,7 @@ getRecordPosition(propertyName)
 	;	
 getPropertyValue(dataRecord,propertyName)
 	;
-	QUIT $PIECE(dataRecord,SEP,$$getRecordPosition(propertyName))
+	QUIT $PIECE(dataRecord,$$SEP^constantClass,$$getRecordPosition(propertyName))
 	;
 getSalaryValue(id,dataRecord)
 	;	

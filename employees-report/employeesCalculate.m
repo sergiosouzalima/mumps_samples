@@ -8,6 +8,8 @@
 	;		
 main(reportFileName)
 	;
+	DO saveDebug^helper("main^employeesCalculate 000000000")
+	;	
 	SET employeeId=""
 	SET generalId=0
 	SET maxSal=0
@@ -31,7 +33,7 @@ main(reportFileName)
 	. ; Set main work globals
 	. SET generalId=$Increment(generalId)
 	. SET ^salaryDept(deptId,employeeId,salaryValue)=""
-	. SET ^salary(salaryValue,generalId)=employeeId;_"^"_employeeData
+	. SET ^salary(salaryValue,generalId)=employeeId
 	. ; Calculate global max & min salary 
 	. SET maxSal=$$getMaxValue^helper(salaryValue,maxSal)
 	. SET minSal=$$getMinValue^helper(salaryValue,minSal)
@@ -49,5 +51,7 @@ main(reportFileName)
 	;	
 	DO main^employeesCalcLastNameMax(reportFileName)
 	;
+	DO saveDebug^helper("main^employeesCalculate 999999999")
+	;	
 	QUIT
 	;	

@@ -33,8 +33,6 @@ setup()
 	;
 tearDown()
 	;
-	KILL SEP
-	KILL TRUE,FALSE
 	KILL CLASSNAME
 	KILL testCounter
 	WRITE !,"*** END RUN",!

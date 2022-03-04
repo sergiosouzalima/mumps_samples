@@ -16,6 +16,8 @@ main(reportFileName)
 	; ^salaryDeptMaxMin(deptId,generalId,maxEmployeeSalary)=employeeId
 	; ^salaryDeptMaxMin(deptId,generalId,minEmployeeSalary)=employeeId
 	;
+	DO saveDebug^helper("main^employeesCalcDeptSalary 000000000")
+	;	
 	KILL ^salaryDeptAvg,^salaryDeptMaxMin
 	;	
 	DO generateSalaryDeptAvg()
@@ -31,6 +33,9 @@ main(reportFileName)
 	DO printDeptSalary
 	;	 
 	CLOSE fileName
+	;	
+	DO saveDebug^helper("main^employeesCalcDeptSalary 999999999")
+	;	
 	QUIT
 	;	
 generateSalaryDeptAvg()
@@ -156,14 +161,14 @@ writeSalaryMinMaxToFile(minMaxArea,deptId,employeeId,salaryValue)
 	;
 writeSalaryAvgToFile(deptId)
 	SET salaryValue=$$formatDecimal^helper(^salaryDeptAvg(deptId))
-	SET deptName=$$getDeptName^department(deptId)
+	SET deptName=$$getDeptName^departmentClass(deptId)
 	SET content=deptName_"|"_salaryValue
 	DO writeToFile("area_avg",content)
 	;	
 	QUIT	
 	;
 getContentToFile(deptId,employeeId,salaryValue)
-	SET deptName=$$getDeptName^department(deptId)
+	SET deptName=$$getDeptName^departmentClass(deptId)
 	SET employeeFullName=$$getEmployeeFullName^employeeClass(employeeId)
 	SET salaryValueFormat=$$formatDecimal^helper(salaryValue)
 	;	

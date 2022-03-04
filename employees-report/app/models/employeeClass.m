@@ -12,14 +12,16 @@
 	; ^employees(2)="Wilson^Silva^3200.00^SM"
 	;	
 set(id,data)
-	IF id="" QUIT FALSE
-	SET employeeName=$piece(data,SEP,1)
-	SET employeeLastName=$piece(data,SEP,2)
+	IF id="" QUIT $$FALSE^constantClass
+	;	
+	SET employeeName=$piece(data,$$SEP^constantClass,1)
+	SET employeeLastName=$piece(data,$$SEP^constantClass,2)
 	SET:employeeLastName="" employeeLastName="-1"
-	SET salaryValue=$piece(data,SEP,3)
-	SET deptId=$piece(data,SEP,4)
-	SET ^employees(id)=employeeName_SEP_employeeLastName_SEP_salaryValue_SEP_deptId
-	QUIT TRUE
+	SET salaryValue=$piece(data,$$SEP^constantClass,3)
+	SET deptId=$piece(data,$$SEP^constantClass,4)
+	SET ^employees(id)=employeeName_$$SEP^constantClass_employeeLastName_$$SEP^constantClass_salaryValue_$$SEP^constantClass_deptId
+	;	
+	QUIT $$TRUE^constantClass
 	;
 create(id,data)
 	;
@@ -38,7 +40,7 @@ getRecordPosition(propertyName)
 	;	
 getPropertyValue(dataRecord,propertyName)
 	;
-	QUIT $PIECE(dataRecord,SEP,$$getRecordPosition(propertyName))
+	QUIT $PIECE(dataRecord,$$SEP^constantClass,$$getRecordPosition(propertyName))
 	;
 getEmployeeFirstName(id,dataRecord)
 	;
@@ -84,6 +86,6 @@ getEmployeeDeptName(id)
 	QUIT $$getDeptName^departmentClass(deptId)
 	;
 delete(id)
-	IF id="" QUIT FALSE
+	IF id="" QUIT $$FALSE^constantClass
 	KILL ^employees(id)
-	QUIT TRUE
+	QUIT $$TRUE^constantClass

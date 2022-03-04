@@ -12,12 +12,14 @@
 	; ^departments("SM")="Software Management^22"
 	;
 set(id,data)
-	IF id="" QUIT FALSE
-	SET deptName=$piece(data,SEP,1)
-	SET employeeQty=$piece(data,SEP,2)
+	IF id="" QUIT $$FALSE^constantClass
+	;	
+	SET deptName=$piece(data,$$SEP^constantClass,1)
+	SET employeeQty=$piece(data,$$SEP^constantClass,2)
 	SET:employeeQty="" employeeQty=0
-	SET ^departments(id)=deptName_SEP_employeeQty
-	QUIT TRUE
+	SET ^departments(id)=deptName_$$SEP^constantClass_employeeQty
+	;	
+	QUIT $$TRUE^constantClass
 	;	
 create(id,data)
 	;
@@ -35,16 +37,7 @@ getRecordPosition(propertyName)
 	;	
 getPropertyValue(dataRecord,propertyName)
 	;
-	QUIT $PIECE(dataRecord,SEP,$$getRecordPosition(propertyName))
-	;
-;get(id,data)
-	;NEW record
-	;KILL data
-	;IF id="" QUIT FALSE
-	;SET record=$get(^departments(id))
-	;SET data("deptName")=$piece(record,SEP,1)
-	;SET data("employeeQty")=$piece(record,SEP,2)
-	;QUIT TRUE
+	QUIT $PIECE(dataRecord,$$SEP^constantClass,$$getRecordPosition(propertyName))
 	;
 get(id)
 	;
@@ -54,15 +47,11 @@ incEmployeeQty(id)
 	;
 	KILL data
 	KILL dataRecord
-	IF id="" QUIT FALSE
-	;QUIT:'$$get(id,.data) FALSE
-	;	
-	;SET deptName=data("deptName")
-	;SET employeeQty=data("employeeQty")+1
+	IF id="" QUIT $$FALSE^constantClass
 	SET dataRecord=$$get(id)
 	SET deptName=$$getDeptName(-1,dataRecord)
 	SET employeeQty=$$getEmployeeQty(-1,dataRecord)+1
-	SET data=deptName_SEP_employeeQty
+	SET data=deptName_$$SEP^constantClass_employeeQty
 	SET ok=$$update(id,data)
 	QUIT ok
 	;
@@ -72,17 +61,7 @@ getDeptName(id,dataRecord)
 	;	
 	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
 	;	
-	QUIT $$getPropertyValue(^employees(id),propertyName)
-	;
-;getProp(id,propertyName)
-	;IF id="" QUIT ""
-	;SET ok=$$get(id,.data)
-	;IF ok QUIT data(propertyName)
-	;IF 'ok QUIT ""
-	;
-;getDeptName(id)
-	;
-	;QUIT $$getProp(id,"deptName")
+	QUIT $$getPropertyValue(^departments(id),propertyName)
 	;
 getEmployeeQty(id,dataRecord)
 	;	
@@ -90,14 +69,10 @@ getEmployeeQty(id,dataRecord)
 	;	
 	QUIT:$D(dataRecord) $$getPropertyValue(dataRecord,propertyName)
 	;	
-	QUIT $$getPropertyValue(^employees(id),propertyName)
+	QUIT $$getPropertyValue(^departments(id),propertyName)
 	;	
-;getEmployeeQty(id)
-	;
-	;QUIT $$getProp(id,"employeeQty")
-	;
 delete(id)
-	IF id="" QUIT FALSE
+	IF id="" QUIT $$FALSE^constantClass
 	KILL ^departments(id)
-	QUIT TRUE
+	QUIT $$TRUE^constantClass
 	;	

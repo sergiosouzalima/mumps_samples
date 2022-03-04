@@ -8,19 +8,19 @@
 	;	
 main
 	DO Initialize
-	DO jsonToFile
+	DO importJsonFile
 	DO generateStatistics
 	DO Finalize
 	QUIT
 	;
 Initialize
-	;
-	DO loadConstants^helper
 	;	
-	WRITE #,!,programTitle,!!
+	WRITE #,!,$$PROGRAMTITLE^constantClass,!!
+	WRITE "Reading from file... "_$$JSONFILENAME^constantClass,!
+	WRITE "Writing to file..... "_$$REPORTFILENAME^constantClass,!
 	;	
 	KILL ^employees,^departments,^debug
-	ZSYSTEM "rm "_reportFileName_" 2> /dev/null"
+	ZSYSTEM "rm "_$$REPORTFILENAME^constantClass_" 2> /dev/null"
 	QUIT
 	;
 Finalize
@@ -28,20 +28,23 @@ Finalize
 	W !,"END RUN ****",!!
 	QUIT
 	;
-jsonToFile
+importJsonFile
 	;	
-	OPEN jsonFileName:(readonly:recordsize=maxStringSize)
+	OPEN $$JSONFILENAME^constantClass:(readonly:recordsize=$$MAXSTRINGSIZE^constantClass)
 	;	
 	SET previousLine=""
 	;	
-	FOR i=1:1 QUIT:$zeof  SET previousLine=$$processLine(jsonFileName,previousLine)
+	FOR i=1:1 QUIT:$zeof  SET previousLine=$$processLine($$JSONFILENAME^constantClass,previousLine)
 	;	
 	USE $principal
-	CLOSE jsonFileName
+	;	
+	CLOSE $$JSONFILENAME^constantClass
 	;	
 	QUIT
 	;	
 processLine(jsonFile,previousLine)
+	;	
+	;DO saveDebug^helper("processLine ini")
 	;	
 	USE jsonFile 
 	READ line
@@ -51,10 +54,14 @@ processLine(jsonFile,previousLine)
 	;		
 	SET previousLine=$$processObj(currentLine)
 	;	
+	;DO saveDebug^helper("processLine end")
+	;	
 	QUIT previousLine
 	;
 processObj(line)
 	;
+	;DO saveDebug^helper("processObj ini")
+	;	
 	QUIT:$length(line)<=0 line
 	;	
 	SET firstBracket=$FIND(line,"{")-1
@@ -96,7 +103,7 @@ cleanLine(line)
 	;	
 generateStatistics
 	;
-	DO main^employeesCalculate(reportFileName)
+	DO main^employeesCalculate($$REPORTFILENAME^constantClass)
 	;	
 	QUIT
 	;	

@@ -9,12 +9,12 @@
 	;
 loadConstants
 	;
-	SET TRUE=1,FALSE=0
-	SET SEP="^"
-	SET programTitle="*** Employees' Statistics Report ***"
-	SET jsonFileName="assets/funcionarios-10K.json"; "assets/funcionarios-5M.json"; "assets/funcionarios.json";"funcionarios-30M.json"
-	SET reportFileName="employeesReport.txt"
-	SET maxStringSize=1024*1024 ; the maximum GT.M string size
+	;SET TRUE=1,FALSE=0
+	;SET SEP="^"
+	;SET programTitle="*** Employees' Statistics Report ***"
+	;SET jsonFileName="assets/funcionarios-10K.json"; "assets/funcionarios-5M.json"; "assets/funcionarios.json";"funcionarios-30M.json"
+	;SET reportFileName="employeesReport.txt"
+	;SET maxStringSize=1024*1024 ; the maximum GT.M string size
 	;	
 	QUIT
 	;	
@@ -34,8 +34,12 @@ removeBraces(content)
 	;	
 extractDeptName(content)
 	;
+	DO saveDebug^helper("extractDeptName ini")
+	;	
 	IF content["nome:" SET content=$P($P(content,",",2),":",2)
 	;
+	DO saveDebug^helper("extractDeptName end")
+	;	
 	QUIT $$removeBraces(content)
 	;
 extractEmployeeFields(content)
@@ -62,7 +66,7 @@ formatIfNull(value)
 	;	
 saveDebug(msg)
 	;
-	SET debugId=debugId+1
-	SET ^debug(debugId)=msg
+	;SET debugId=debugId+1
+	SET ^debug(msg)=""
 	QUIT
 	;	
