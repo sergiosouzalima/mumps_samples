@@ -14,8 +14,8 @@
 set(id,data)
 	IF id="" QUIT $$FALSE^constantClass
 	;	
-	SET deptName=$piece(data,$$SEP^constantClass,1)
-	SET employeeQty=$piece(data,$$SEP^constantClass,2)
+	SET deptName=$$getDeptName(id,data) 
+	SET employeeQty=$$getEmployeeQty(id,data)
 	SET:employeeQty="" employeeQty=0
 	SET ^departments(id)=deptName_$$SEP^constantClass_employeeQty
 	;	
