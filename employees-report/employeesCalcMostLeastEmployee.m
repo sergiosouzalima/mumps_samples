@@ -7,8 +7,6 @@
 	; Made with GT.M Mumps for Linux. ;
 	;		
 main(reportFileName)
-	;
-	DO saveDebug^helper("main^employeesCalcMostLeastEmployee 000000000")
 	;	
 	KILL ^mostLeastEmployee
 	;	
@@ -23,8 +21,6 @@ main(reportFileName)
 	DO printLeastEmployee()
 	;
 	CLOSE fileName
-	;	
-	DO saveDebug^helper("main^employeesCalcMostLeastEmployee 999999999")
 	;	
 	QUIT	
 	;	

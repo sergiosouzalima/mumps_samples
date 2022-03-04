@@ -44,8 +44,6 @@ importJsonFile
 	;	
 processLine(jsonFile,previousLine)
 	;	
-	;DO saveDebug^helper("processLine ini")
-	;	
 	USE jsonFile 
 	READ line
 	SET currentLine=previousLine_line
@@ -54,13 +52,9 @@ processLine(jsonFile,previousLine)
 	;		
 	SET previousLine=$$processObj(currentLine)
 	;	
-	;DO saveDebug^helper("processLine end")
-	;	
 	QUIT previousLine
 	;
 processObj(line)
-	;
-	;DO saveDebug^helper("processObj ini")
 	;	
 	QUIT:$length(line)<=0 line
 	;	

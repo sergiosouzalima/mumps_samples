@@ -15,8 +15,6 @@ main(reportFileName)
 	;	
 	; ^salaryDeptMaxMin(deptId,generalId,maxEmployeeSalary)=employeeId
 	; ^salaryDeptMaxMin(deptId,generalId,minEmployeeSalary)=employeeId
-	;
-	DO saveDebug^helper("main^employeesCalcDeptSalary 000000000")
 	;	
 	KILL ^salaryDeptAvg,^salaryDeptMaxMin
 	;	
@@ -33,8 +31,6 @@ main(reportFileName)
 	DO printDeptSalary
 	;	 
 	CLOSE fileName
-	;	
-	DO saveDebug^helper("main^employeesCalcDeptSalary 999999999")
 	;	
 	QUIT
 	;	

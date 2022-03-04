@@ -7,8 +7,6 @@
 	; Made with GT.M Mumps for Linux. ;
 	;		
 main(reportFileName)
-	;
-	DO saveDebug^helper("main^employeesCalcLastNameMax 000000000")
 	;	
 	SET fileName=reportFileName
 	OPEN fileName:(append:stream:nowrap:chset="M")
@@ -17,8 +15,6 @@ main(reportFileName)
 	DO generateLastNameMax()
 	;
 	CLOSE fileName
-	;	
-	DO saveDebug^helper("main^employeesCalcLastNameMax 999999999")
 	;	
 	QUIT	
 	;	

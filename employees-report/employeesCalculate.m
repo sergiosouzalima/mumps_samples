@@ -7,8 +7,6 @@
 	; Made with GT.M Mumps for Linux. ;
 	;		
 main(reportFileName)
-	;
-	DO saveDebug^helper("main^employeesCalculate 000000000")
 	;	
 	SET employeeId=""
 	SET generalId=0
@@ -50,8 +48,6 @@ main(reportFileName)
 	DO main^employeesCalcMostLeastEmployee(reportFileName)
 	;	
 	DO main^employeesCalcLastNameMax(reportFileName)
-	;
-	DO saveDebug^helper("main^employeesCalculate 999999999")
 	;	
 	QUIT
 	;	
