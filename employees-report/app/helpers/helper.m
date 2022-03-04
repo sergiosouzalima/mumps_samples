@@ -46,7 +46,7 @@ extractEmployeeFields(content)
 	; {id:1,nome:Aahron,sobrenome:Abaine,salario:24048.75,area:A2}
 	;
 	SET content=$$removeBraces(content)
-	SET content=$P($P(content,",",2),":",2)_"^"_$P($P(content,",",3),":",2)_"^"_$P($P(content,",",4),":",2)_"^"_$P($P(content,",",5),":",2)
+	SET content=$P($P(content,",",2),":",2)_$$SEP^constantClass_$P($P(content,",",3),":",2)_$$SEP^constantClass_$P($P(content,",",4),":",2)_$$SEP^constantClass_$P($P(content,",",5),":",2)
 	SET content="{"_content_"}"
 	QUIT content
 	;
@@ -66,7 +66,6 @@ formatIfNull(value)
 	;	
 saveDebug(msg)
 	;
-	;SET debugId=debugId+1
 	SET ^debug(msg)=""
 	QUIT
 	;	

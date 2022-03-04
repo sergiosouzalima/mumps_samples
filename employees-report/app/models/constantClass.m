@@ -13,7 +13,7 @@ FALSE()
 	QUIT 0
 	;	
 SEP()
-	QUIT "^"
+	QUIT "~"
 	;	
 PROGRAMTITLE()
 	QUIT "*** Employees' Statistics Report ***"
