@@ -12,10 +12,12 @@
 	; ^departments("SM")="Software Management^22"
 	;
 set(id,data)
+	SET id=$$allTrim^helper(id)
 	IF id="" QUIT $$FALSE^constantClass
-	;	
-	SET deptName=$$getDeptName(id,data) 
-	SET employeeQty=$$getEmployeeQty(id,data)
+	;
+	SET data=$$removeBraces^helper(data)	
+	SET deptName=$$allTrim^helper($$getDeptName(id,data))
+	SET employeeQty=$$allTrim^helper($$getEmployeeQty(id,data))
 	SET:employeeQty="" employeeQty=0
 	SET ^departments(id)=deptName_$$SEP^constantClass_employeeQty
 	;	

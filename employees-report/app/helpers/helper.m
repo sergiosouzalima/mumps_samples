@@ -21,6 +21,10 @@ removeBraces(content)
 	;
 	QUIT $translate(content,"{}","")
 	;	
+allTrim(content)
+	;
+	QUIT $$FUNC^%TRIM(content)
+	;	
 extractDeptName(content)
 	;
 	IF content["nome:" SET content=$P($P(content,",",2),":",2)

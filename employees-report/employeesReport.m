@@ -51,11 +51,13 @@ processLine(previousLine)
 	;	
 	SET currentLine=previousLine_$$cleanLine(line)
 	;	 
-	QUIT $$processObj(currentLine)
+	QUIT $$processObj(currentLine,previousLine)
 	;
-processObj(line)
+processObj(line,previousLine)
 	;	
 	QUIT:$length(line)<=0 line
+	;	
+	QUIT:(previousLine="")&($$allTrim^helper(line)="{") ""
 	;	
 	SET firstBracket=$FIND(line,"{")-1
 	SET secondBracket=$FIND(line,"}",firstBracket)-1
@@ -90,6 +92,7 @@ cleanLine(line)
 	;	
 	SET line=$translate(line,"""","")
 	SET:line="{funcionarios:[" line=""
+	SET:line="funcionarios:[" line=""
 	SET:line="areas:[" line=""
 	;	
 	QUIT line
