@@ -15,10 +15,10 @@ set(id,data)
 	SET id=$$allTrim^helper(id)
 	IF id="" QUIT $$FALSE^constantClass
 	;	
-	;SET data=$$removeBraces^helper(data)
+	SET data=$$removeBraces^helper(data)
 	SET employeeName=$$allTrim^helper($$getEmployeeFirstName(id,data))
 	SET employeeLastName=$$allTrim^helper($$getEmployeeLastName(id,data))
-	SET:employeeLastName="" employeeLastName="-1"
+	SET:employeeLastName="" employeeLastName="999999999"
 	SET salaryValue=$$allTrim^helper($$getEmployeeSalaryValue(id,data))
 	SET deptId=$$allTrim^helper($$getEmployeeDeptId(id,data))
 	SET ^employees(id)=employeeName_$$SEP^constantClass_employeeLastName_$$SEP^constantClass_salaryValue_$$SEP^constantClass_deptId

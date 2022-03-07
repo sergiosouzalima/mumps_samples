@@ -48,7 +48,7 @@ generateLastNameMax()
 	QUIT	
 	;
 printLastNameMax(employeeLastName,employeeFullName,employeeSalaryValue)	
-	SET content=$$formatIfNull^helper(employeeLastName)_"|"_$$formatIfNull^helper(employeeFullName)_"|"_$$formatDecimal^helper(employeeSalaryValue)	
+	SET content=$$plusToDashReplace^helper($$formatIfNull^helper(employeeLastName))_"|"_$$plusToDashReplace^helper($$formatIfNull^helper(employeeFullName))_"|"_$$formatDecimal^helper(employeeSalaryValue)	
 	;	
 	DO writeToFile("last_name_max",content)
 	;

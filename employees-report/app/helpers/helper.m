@@ -35,7 +35,8 @@ extractEmployeeFields(content)
 	; {id:1,nome:Aahron,sobrenome:Abaine,salario:24048.75,area:A2}
 	;
 	SET content=$$removeBraces(content)
-	SET content=$P($P(content,",",2),":",2)_$$SEP^constantClass_$P($P(content,",",3),":",2)_$$SEP^constantClass_$P($P(content,",",4),":",2)_$$SEP^constantClass_$P($P(content,",",5),":",2)
+	;SET content=$P($P(content,",",2),":",2)_$$SEP^constantClass_$$dashReplace^helper($P($P(content,",",3),":",2))_$$SEP^constantClass_$P($P(content,",",4),":",2)_$$SEP^constantClass_$P($P(content,",",5),":",2)
+	SET content=$P($P(content,",",2),":",2)_$$SEP^constantClass_$$dashToPlusReplace^helper($P($P(content,",",3),":",2))_$$SEP^constantClass_$P($P(content,",",4),":",2)_$$SEP^constantClass_$P($P(content,",",5),":",2)
 	SET content="{"_content_"}"
 	QUIT content
 	;
@@ -51,7 +52,7 @@ formatDecimal(value)
 	;	
 formatIfNull(value)
 	;
-	QUIT $translate(value,"-1","")
+	QUIT $translate(value,"999999999","")
 	;	
 fileExists(fileName)
 	;
@@ -61,6 +62,18 @@ fileExists(fileName)
 	;	
 	QUIT:empty'="" $$TRUE^constantClass
 	;
+dashToPlusReplace(content)
+	;
+	QUIT:content["-" $translate(content,"-","+")
+	;
+	QUIT content
+	;	
+plusToDashReplace(content)
+	;	
+	QUIT:content["+" $translate(content,"+","-")
+	;	
+	QUIT content
+	;	
 saveDebug(msg)
 	;
 	SET ^debug(msg)=""

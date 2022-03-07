@@ -57,7 +57,7 @@ writeGlobalAvgToFile(globalAvg)
 	QUIT	
 	;
 getContentToFile(employeeId)
-	SET employeeFullName=$$getEmployeeFullName^employeeClass(employeeId)
+	SET employeeFullName=$$plusToDashReplace^helper($$getEmployeeFullName^employeeClass(employeeId))
 	SET salary=$$formatDecimal^helper($$getEmployeeSalaryValue^employeeClass(employeeId))
 	SET content=employeeFullName_"|"_salary
 	;	

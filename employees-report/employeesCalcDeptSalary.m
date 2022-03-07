@@ -165,7 +165,7 @@ writeSalaryAvgToFile(deptId)
 	;
 getContentToFile(deptId,employeeId,salaryValue)
 	SET deptName=$$getDeptName^departmentClass(deptId)
-	SET employeeFullName=$$getEmployeeFullName^employeeClass(employeeId)
+	SET employeeFullName=$$plusToDashReplace^helper($$getEmployeeFullName^employeeClass(employeeId))
 	SET salaryValueFormat=$$formatDecimal^helper(salaryValue)
 	;	
 	SET content=deptName_"|"_employeeFullName_"|"_salaryValueFormat
