@@ -19,9 +19,9 @@ PROGRAMTITLE()
 	QUIT "*** Employees' Statistics Report ***"
 	;	
 JSONFILENAME()
-	QUIT "assets/Funcionarios-10K.json"
+	;QUIT "assets/Funcionarios-10K.json"
 	;QUIT "assets/funcionarios-5M.json"
-	;QUIT "assets/funcionarios.json"
+	QUIT "assets/Funcionarios.json"
 	;QUIT "assets/funcionarios2.json"
 	;QUIT "funcionarios-30M.json"
 	;

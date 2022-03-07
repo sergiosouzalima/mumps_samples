@@ -20,6 +20,11 @@ Initialize
 	WRITE "Writing to file..... "_$$REPORTFILENAME^constantClass,!
 	;	
 	KILL ^employees,^departments,^debug
+	;	
+	IF '$$fileExists^helper($$JSONFILENAME^constantClass) DO
+	. WRITE !,"File not found: "_$$JSONFILENAME^constantClass,!
+	. HALT
+	;	
 	ZSYSTEM "rm "_$$REPORTFILENAME^constantClass_" 2> /dev/null"
 	QUIT
 	;

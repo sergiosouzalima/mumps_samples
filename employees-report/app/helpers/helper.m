@@ -53,6 +53,14 @@ formatIfNull(value)
 	;
 	QUIT $translate(value,"-1","")
 	;	
+fileExists(fileName)
+	;
+	SET empty=$ZSEARCH(fileName)
+	;	
+	QUIT:empty="" $$FALSE^constantClass
+	;	
+	QUIT:empty'="" $$TRUE^constantClass
+	;
 saveDebug(msg)
 	;
 	SET ^debug(msg)=""

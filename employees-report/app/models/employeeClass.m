@@ -15,7 +15,7 @@ set(id,data)
 	SET id=$$allTrim^helper(id)
 	IF id="" QUIT $$FALSE^constantClass
 	;	
-	SET data=$$removeBraces^helper(data)
+	;SET data=$$removeBraces^helper(data)
 	SET employeeName=$$allTrim^helper($$getEmployeeFirstName(id,data))
 	SET employeeLastName=$$allTrim^helper($$getEmployeeLastName(id,data))
 	SET:employeeLastName="" employeeLastName="-1"
