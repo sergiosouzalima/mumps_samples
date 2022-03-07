@@ -2,8 +2,9 @@
 	;
 	; File mame: employeesReport.m
 	; Author: Sergio Lima (Feb, 13 2022)
-	; How to run: mumps -r main^employeesReport
-	;
+	; How to run:
+	;  rm sortEmployeesReport.txt && time mumps -r main^employeesReport && cat employeesReport.txt | sort > sortEmployeesReport.txt
+	;	
 	; Made with GT.M Mumps for Linux. ;
 	;	
 main
