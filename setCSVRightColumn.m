@@ -1,7 +1,7 @@
 	; 
 	; Find & set the appropriated column in a CSV row. ;
 	;
-	; File mame: setCSVRightColumn.m.m
+	; File mame: setCSVRightColumn.m
 	; Author: Sergio Lima (Sep, 7 2022)
 	;
 	; ---
