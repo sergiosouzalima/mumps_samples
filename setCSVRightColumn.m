@@ -23,33 +23,33 @@ PROCESS;
 	;
 	N CSVCOLS
 	;
-	W "Imprime 10.000,00 no peace 3",!
+	W "Imprime 10.000,00 no piece 3",!
 	S POS=2,VAL="10.000,00",CSVCOLS=""
 	S CSVCOLS=$$SETCSVCOL(POS,VAL,CSVCOLS)
 	W CSVCOLS," tem "_$$CHARCOUNTER(CSVCOLS)_" ;",!!
 	;
-	W "Imprime 50.000,00 no peace 10",!
+	W "Imprime 50.000,00 no piece 10",!
 	S POS=4,VAL="50.000,00"
 	S CSVCOLS=$$SETCSVCOL(POS,VAL,CSVCOLS)
 	W CSVCOLS," tem "_$$CHARCOUNTER(CSVCOLS)_" ;",!!
 	;
-	W "Imprime 700.000,00 no peace 9",!
+	W "Imprime 700.000,00 no piece 9",!
 	S POS=1,VAL="700.000,00"
 	S CSVCOLS=$$SETCSVCOL(POS,VAL,CSVCOLS)
 	W CSVCOLS," tem "_$$CHARCOUNTER(CSVCOLS)_" ;",!!
 	;
-	W "Imprime 2.000,00 no peace 1",!
+	W "Imprime 2.000,00 no piece 1",!
 	S POS=6,VAL="2.000,00"
 	S CSVCOLS=$$SETCSVCOL(POS,VAL,CSVCOLS)
 	W CSVCOLS," tem "_$$CHARCOUNTER(CSVCOLS)_" ;",!!
 	;
-	W "Imprime 999.000,00 no peace 34",!
+	W "Imprime 999.000,00 no piece 34",!
 	S POS=30,VAL="999.000,00"
 	S CSVCOLS=$$SETCSVCOL(POS,VAL,CSVCOLS)
 	W CSVCOLS," tem "_$$CHARCOUNTER(CSVCOLS)_" ;",!!
 	;	
 	;
-	W "Imprime 55.000,00 no peace que nao existe",!
+	W "Imprime 55.000,00 no piece que nao existe",!
 	S POS=34,VAL="55.000,00"
 	S CSVCOLS=$$SETCSVCOL(POS,VAL,CSVCOLS)
 	W CSVCOLS," tem "_$$CHARCOUNTER(CSVCOLS)_" ;",!!
